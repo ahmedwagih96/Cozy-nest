@@ -1,16 +1,24 @@
-import express, { Request, Response } from "express";
-import cors from "cors";
 import "dotenv/config";
+import "express-async-errors";
+import express from "express";
+import cors from "cors";
 import connectDB from "./db/connect";
+import userRoutes from "./routes/users.route";
+import authRoutes from "./routes/auth.route";
+import { NotFoundMiddleware, ErrorHandlerMiddleware } from "./middleware";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.get("/api/test", async (req: Request, res: Response) => {
-  res.json({ message: "Hello from express endpoint!" });
-});
+// routes
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+
+// middlewares
+app.use(NotFoundMiddleware);
+app.use(ErrorHandlerMiddleware);
 
 const start = async () => {
   try {
