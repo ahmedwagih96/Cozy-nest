@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import User from "../models/user.model";
-import jwt from "jsonwebtoken";
-import { UnauthorizedError } from "../errors";
+import { NotFoundError, UnauthorizedError } from "../errors";
 import bcrypt from "bcryptjs";
 
 const loginUserController = async (req: Request, res: Response) => {
@@ -17,21 +16,38 @@ const loginUserController = async (req: Request, res: Response) => {
     throw new UnauthorizedError("Invalid Credentials");
   }
 
-  const token = jwt.sign(
-    { userId: user.id },
-    process.env.JWT_SECRET_KEY as string,
-    {
-      expiresIn: "1d",
-    }
-  );
+  const token = user.generateAuthToken();
 
   res.cookie("jwt", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 86400000,
+    maxAge: 30 * 24 * 60 * 1000,
   });
-
-  return res.status(200).json({ userId: user._id });
+  user = await User.findOne({ email });
+  return res.status(200).json({ user });
 };
 
-export { loginUserController };
+const validateTokenController = async (req: Request, res: Response) => {
+  const user = await User.findById(req.userId);
+  if (!user) {
+    throw new NotFoundError("User Not Found");
+  }
+
+  const token = user.generateAuthToken();
+
+  res.cookie("jwt", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 30 * 24 * 60 * 1000,
+  });
+
+  res.status(200).send({ user });
+};
+
+const logOutController = (req: Request, res: Response) => {
+  return res
+    .clearCookie("jwt", { httpOnly: true, secure: true })
+    .status(200)
+    .json({ message: "User logged out successfully" });
+};
+export { loginUserController, validateTokenController, logOutController };

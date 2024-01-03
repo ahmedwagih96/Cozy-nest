@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import User from "../models/user.model";
-import jwt from "jsonwebtoken";
 import { BadRequestError } from "../errors";
 
 const registerUserController = async (req: Request, res: Response) => {
@@ -11,21 +10,16 @@ const registerUserController = async (req: Request, res: Response) => {
   user = new User(req.body);
   await user.save();
 
-  const token = jwt.sign(
-    { userId: user.id },
-    process.env.JWT_SECRET_KEY as string,
-    {
-      expiresIn: "1d",
-    }
-  );
+  const token = user.generateAuthToken();
 
+  user = await User.findOne({ email: req.body.email });
   res.cookie("jwt", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 86400000,
+    maxAge: 30 * 24 * 60 * 1000,
   });
 
-  return res.sendStatus(200);
+  return res.status(200).json({ message: "User Registered", user });
 };
 
 export { registerUserController };

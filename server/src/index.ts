@@ -6,11 +6,16 @@ import connectDB from "./db/connect";
 import userRoutes from "./routes/users.route";
 import authRoutes from "./routes/auth.route";
 import { NotFoundMiddleware, ErrorHandlerMiddleware } from "./middleware";
+import cookieParser from "cookie-parser"
 
 const app = express();
+app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true
+}));
 
 // routes
 app.use("/api/users", userRoutes);
