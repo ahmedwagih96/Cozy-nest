@@ -10,8 +10,8 @@ const config: Config = {
     extend: {},
     container: {
       padding: {
-        DEFAULT: '1rem', 
-        md: '10rem',     
+        DEFAULT: "1rem",
+        md: "5rem",
       },
     },
   },

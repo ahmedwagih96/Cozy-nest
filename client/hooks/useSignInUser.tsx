@@ -1,38 +1,35 @@
-import { RegisterFormData } from "@/types/typings";
+import { SignInFormData } from "@/types/typings";
 import { useForm } from "react-hook-form";
+import { signInService } from "@/services/user";
 import { useMutation } from "react-query";
-import { registerService } from "@/services/user";
 import { useAppContext } from "@/contexts/AppContext";
 import { useRouter } from "next/navigation";
 import { UserType } from "@/types/mongoTypes";
-function useRegisterUser() {
+function useSignInUser() {
   const router = useRouter();
   const { showToast, signInUser } = useAppContext();
   const {
     register,
-    watch,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterFormData>({
+  } = useForm<SignInFormData>({
     defaultValues: {
-      firstName: "",
-      lastName: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
-  const mutation = useMutation(registerService, {
+  const mutation = useMutation(signInService, {
     onSuccess: async ({ user }: { user: UserType }) => {
       signInUser(user);
-      showToast({ message: "Registration Success!", type: "SUCCESS" });
+      showToast({ message: "Sign in Successful!", type: "SUCCESS" });
       router.push("/");
     },
     onError: (error: Error) => {
       showToast({ message: error.message, type: "ERROR" });
     },
   });
+
   const onSubmit = handleSubmit((data) => {
     mutation.mutate(data);
   });
@@ -40,9 +37,8 @@ function useRegisterUser() {
   return {
     onSubmit,
     errors,
-    watch,
     register,
   };
 }
 
-export default useRegisterUser;
+export default useSignInUser;
