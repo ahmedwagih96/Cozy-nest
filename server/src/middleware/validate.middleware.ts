@@ -1,90 +1,53 @@
 import { Request, Response, NextFunction } from "express";
-import { check, validationResult } from "express-validator";
 import { BadRequestError } from "../errors";
+import Joi, { ValidationError, ValidationErrorItem } from "joi";
 
-const ValidateUserRegistration = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  await Promise.all([
-    check("firstName", "First Name is required").notEmpty().isString().run(req),
-    check("lastName", "Last Name is required").notEmpty().isString().run(req),
-    check("email", "Email is required").isEmail().run(req),
-    check("password", "Password with 6 or more characters required")
-      .isLength({
-        min: 6,
-      })
-      .run(req),
-  ]);
+interface JoiValidationError extends ValidationError {
+  details: ValidationErrorItem[];
+}
 
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const errorMessage = errors.array()[0]?.msg || "Validation failed";
-    throw new BadRequestError(errorMessage);
-  }
+const userRegistrationSchema = Joi.object({
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+  email: Joi.string().email().required(),
+  password: Joi.string().min(8).required(),
+});
 
-  next();
-};
+const loginUserSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(8).required(),
+});
 
-const ValidateLoginUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  await Promise.all([
-    check("email", "Email is required").isEmail().run(req),
-    check("password", "Password with 6 or more characters required")
-      .isLength({
-        min: 6,
-      })
-      .run(req),
-  ]);
+const createHotelSchema = Joi.object({
+  name: Joi.string().required().label("Name"),
+  city: Joi.string().required().label("City"),
+  country: Joi.string().required().label("Country"),
+  description: Joi.string().required().label("Description"),
+  type: Joi.string().required().label("Type"),
+  pricePerNight: Joi.number().required().label("Price Per Night"),
+  adultCount: Joi.number().required().label("Adult Count"),
+  childCount: Joi.number().required().label("Child Count"),
+  starRating: Joi.number().required().label("Star Rating"),
+  facilities: Joi.array().required().label("Facilities"),
+});
 
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const errorMessage = errors.array()[0]?.msg || "Validation failed";
-    throw new BadRequestError(errorMessage);
-  }
+const validateWithJoi =
+  (schema: Joi.ObjectSchema) =>
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      console.log(req.body);
+      await schema.validateAsync(req.body);
+      next();
+    } catch (error) {
+      const joiError = error as JoiValidationError;
+      throw new BadRequestError(
+        joiError.details[0].message.replace(/["\\]/g, "")
+      );
+    }
+  };
 
-  next();
-};
-
-const ValidateCreateHotel = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  await Promise.all([
-    check("name", "Name is required").notEmpty().isString().run(req),
-    check("city", "City is required").notEmpty().isString().run(req),
-    check("country", "Country is required").notEmpty().isString().run(req),
-    check("description", "Description is required")
-      .notEmpty()
-      .isString()
-      .run(req),
-    check("type", "Hotel type is required").notEmpty().isString().run(req),
-    check("adultCount", "Adult Count is required")
-      .notEmpty()
-      .isNumeric()
-      .run(req),
-    check("pricePerNight", "Price per night is required")
-      .notEmpty()
-      .isNumeric()
-      .run(req),
-    check("facilities", "Facilities are required")
-      .notEmpty()
-      .isArray()
-      .run(req),
-  ]);
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const errorMessage = errors.array()[0]?.msg || "Validation failed";
-    throw new BadRequestError(errorMessage);
-  }
-
-  next();
-};
+const ValidateUserRegistration = validateWithJoi(userRegistrationSchema);
+const ValidateLoginUser = validateWithJoi(loginUserSchema);
+const ValidateCreateHotel = validateWithJoi(createHotelSchema);
 
 export { ValidateUserRegistration, ValidateLoginUser, ValidateCreateHotel };

@@ -11,8 +11,8 @@ const router = express.Router();
 router.post(
   "/",
   VerifyTokenMiddleware,
-  ValidateCreateHotel,
   MediaUploadMiddleware.array("imageFiles", 6),
+  ValidateCreateHotel,
   createHotelController
 );
 
