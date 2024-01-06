@@ -1,17 +1,9 @@
-import mongoose, { Document } from "mongoose";
+import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { UserDocument } from "../shared/types";
 
-interface UserType {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-}
 
-interface UserDocument extends Document, UserType {
-  generateAuthToken(): string;
-}
 
 const userSchema = new mongoose.Schema({
   email: {

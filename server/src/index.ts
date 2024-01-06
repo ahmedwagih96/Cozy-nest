@@ -5,21 +5,25 @@ import cors from "cors";
 import connectDB from "./db/connect";
 import userRoutes from "./routes/users.route";
 import authRoutes from "./routes/auth.route";
+import hotelRoutes from "./routes/hotels.route";
 import { NotFoundMiddleware, ErrorHandlerMiddleware } from "./middleware";
-import cookieParser from "cookie-parser"
+import cookieParser from "cookie-parser";
 
 const app = express();
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 
 // routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/hotels", hotelRoutes);
 
 // middlewares
 app.use(NotFoundMiddleware);
