@@ -3,7 +3,7 @@ import uploadImagesToCloudinary from "../utils/cloudinary";
 import { HotelDocument } from "../shared/types";
 import { ObjectId } from "mongoose";
 import Hotel from "../models/hotel.model";
-import { BadRequestError, NotFoundError } from "../errors";
+import { BadRequestError, NotFoundError, UnauthorizedError } from "../errors";
 
 const createHotelController = async (req: Request, res: Response) => {
   const imageFiles = req.files as Express.Multer.File[];
@@ -29,9 +29,21 @@ const createHotelController = async (req: Request, res: Response) => {
   res.status(201).json({ hotel });
 };
 
-const getHotelsByUserController = async (req: Request, res: Response) => {
+const getMyHotelsController = async (req: Request, res: Response) => {
   const hotels = await Hotel.find({ user: req.userId });
   res.status(200).json({ hotels });
+};
+
+const getMyHotelController = async (req: Request, res: Response) => {
+  const hotel = await Hotel.findById(req.params.id);
+  if (!hotel) {
+    throw new NotFoundError("Hotel Not Found");
+  }
+
+  if (hotel.user.toString() !== req.userId) {
+    throw new UnauthorizedError("Access Denied.");
+  }
+  res.status(200).json({ hotel });
 };
 
 const getHotelByIdController = async (req: Request, res: Response) => {
@@ -42,8 +54,5 @@ const getHotelByIdController = async (req: Request, res: Response) => {
 
   res.status(200).json({ hotel });
 };
-export {
-  createHotelController,
-  getHotelsByUserController,
-  getHotelByIdController,
-};
+
+export { createHotelController, getMyHotelsController, getHotelByIdController, getMyHotelController };

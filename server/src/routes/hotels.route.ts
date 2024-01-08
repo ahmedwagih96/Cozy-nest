@@ -7,8 +7,9 @@ import {
 } from "../middleware";
 import {
   createHotelController,
-  getHotelsByUserController,
-  getHotelByIdController
+  getMyHotelsController,
+  getHotelByIdController,
+  getMyHotelController,
 } from "../controllers/hotels.controller";
 
 const router = express.Router();
@@ -21,6 +22,12 @@ router.post(
   createHotelController
 );
 
-router.get("/my-hotels", VerifyTokenMiddleware, getHotelsByUserController);
-router.get('/:id', ValidateObjectId, getHotelByIdController)
+router.get("/my-hotels", VerifyTokenMiddleware, getMyHotelsController);
+router.get(
+  "/my-hotels/:id",
+  ValidateObjectId,
+  VerifyTokenMiddleware,
+  getMyHotelController
+);
+router.get("/:id", ValidateObjectId, getHotelByIdController);
 export default router;
