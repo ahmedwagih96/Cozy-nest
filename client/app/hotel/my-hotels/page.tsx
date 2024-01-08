@@ -3,17 +3,19 @@ import { useQuery } from "react-query";
 import { fetchMyHotelsService } from "@/services/hotel";
 import Link from "next/link";
 import { MyHotel } from "@/components";
+import { useAppContext } from "@/contexts/AppContext";
 
 const page = () => {
+  const { showToast } = useAppContext();
   const { data, isLoading } = useQuery("fetchMyHotels", fetchMyHotelsService, {
-    onError: () => {},
+    onError: (error: Error) => {
+      showToast({ message: error.message, type: "ERROR" });
+    },
   });
 
-  if (!isLoading && !data?.hotels.length)  {
+  if (!isLoading && !data?.hotels.length) {
     return <span>You do not have any hotels yet</span>;
   }
-
- 
 
   return (
     <div className="space-y-5">

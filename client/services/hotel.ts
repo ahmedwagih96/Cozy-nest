@@ -16,7 +16,7 @@ export const createHotelService = async (
   const responseBody = await response.json();
 
   if (!response.ok) {
-    throw new Error("Failed to add hotel");
+    throw new Error(responseBody.message);
   }
 
   return responseBody;
@@ -32,8 +32,23 @@ export const fetchMyHotelsService = async (): Promise<{
   const responseBody = await response.json();
 
   if (!response.ok) {
-    throw new Error("Error fetching hotels");
+    throw new Error(responseBody.message);
   }
 
+  return responseBody;
+};
+
+export const fetchHotelByIdService = async (
+  hotelId: string
+): Promise<{ hotel: HotelType }> => {
+  const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`, {
+    credentials: "include",
+  });
+
+  const responseBody = await response.json();
+
+  if (!response.ok) {
+    throw new Error(responseBody.message);
+  }
   return responseBody;
 };
