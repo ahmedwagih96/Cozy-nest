@@ -3,7 +3,7 @@ import uploadImagesToCloudinary from "../utils/cloudinary";
 import { HotelDocument } from "../shared/types";
 import { ObjectId } from "mongoose";
 import Hotel from "../models/hotel.model";
-import { BadRequestError } from "../errors";
+import { BadRequestError, NotFoundError } from "../errors";
 
 const createHotelController = async (req: Request, res: Response) => {
   const imageFiles = req.files as Express.Multer.File[];
@@ -34,4 +34,16 @@ const getHotelsByUserController = async (req: Request, res: Response) => {
   res.status(200).json({ hotels });
 };
 
-export { createHotelController, getHotelsByUserController };
+const getHotelByIdController = async (req: Request, res: Response) => {
+  const hotel = await Hotel.findById(req.params.id);
+  if (!hotel) {
+    throw new NotFoundError("Hotel Not Found");
+  }
+
+  res.status(200).json({ hotel });
+};
+export {
+  createHotelController,
+  getHotelsByUserController,
+  getHotelByIdController,
+};

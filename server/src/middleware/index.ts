@@ -7,7 +7,7 @@ import {
 } from "./validate.middleware";
 import VerifyTokenMiddleware from "./authentication.middleware";
 import MediaUploadMiddleware from "./mediaHandling.middleware";
-
+import ValidateObjectId from './validateObjectId.middleware'
 export {
   NotFoundMiddleware,
   ErrorHandlerMiddleware,
@@ -15,5 +15,6 @@ export {
   ValidateLoginUser,
   VerifyTokenMiddleware,
   MediaUploadMiddleware,
-  ValidateCreateHotel
+  ValidateCreateHotel,
+  ValidateObjectId
 };
