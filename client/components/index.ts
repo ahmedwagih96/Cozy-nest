@@ -4,7 +4,7 @@ import SignOutButton from "./Header/SignOutButton";
 import Footer from "./Footer";
 import Hero from "./Hero";
 import Toast from "./Toast";
-
+import MyHotel from "./MyHotel";
 // FORMS
 import SignInForm from "./Forms/SignInForm";
 import RegisterForm from "./Forms/RegisterForm";
@@ -29,4 +29,5 @@ export {
   ImagesInput,
   GuestsInput,
   FacilitiesInput,
+  MyHotel
 };
