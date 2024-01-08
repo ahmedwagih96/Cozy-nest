@@ -14,7 +14,7 @@ const FacilitiesInput = () => {
       <h2 className="text-2xl font-bold mb-3">Facilities</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         {hotelFacilities.map((facility) => (
-          <label className="text-sm flex gap-1 text-gray-700">
+          <label className="text-sm flex gap-1 text-gray-700" key={facility}>
             <input
               type="checkbox"
               value={facility}

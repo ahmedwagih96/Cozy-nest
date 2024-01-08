@@ -10,8 +10,8 @@ import useManageHotel from "@/hooks/useManageHotel";
 import { ManageHotelFormProps } from "@/types/props";
 import { FormProvider } from "react-hook-form";
 
-function ManageHotelForm({ onSave, loading }: ManageHotelFormProps) {
-  const { formMethods, onSubmit } = useManageHotel({onSave});
+function ManageHotelForm({ onSave, loading, hotel }: ManageHotelFormProps) {
+  const { formMethods, onSubmit } = useManageHotel({ onSave, hotel });
   return (
     <FormProvider {...formMethods}>
       <form className="flex flex-col gap-10" onSubmit={onSubmit}>

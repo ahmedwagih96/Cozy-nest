@@ -13,6 +13,8 @@ import DetailsInput from "./Forms/ManageHotelForm/DetailsInput";
 import TypeInput from "./Forms/ManageHotelForm/TypeInput";
 import ImagesInput from "./Forms/ManageHotelForm/ImagesInput";
 import GuestsInput from "./Forms/ManageHotelForm/GuestsInput";
+import ExistingImages from "./Forms/ManageHotelForm/ExistingImages";
+import SelectedImages from "./Forms/ManageHotelForm/SelectedImages";
 import FacilitiesInput from "./Forms/ManageHotelForm/FacilitiesInput";
 export {
   Header,
@@ -29,5 +31,7 @@ export {
   ImagesInput,
   GuestsInput,
   FacilitiesInput,
-  MyHotel
+  MyHotel,
+  ExistingImages,
+  SelectedImages
 };

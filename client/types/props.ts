@@ -1,3 +1,5 @@
+import { HotelType } from "./mongoTypes";
+
 export type ToastProps = {
   message: string;
   type: "SUCCESS" | "ERROR";
@@ -5,6 +7,7 @@ export type ToastProps = {
 };
 
 export type ManageHotelFormProps = {
+  hotel?: HotelType;
   loading: boolean;
   onSave: (hotelFormData: FormData) => void;
 };

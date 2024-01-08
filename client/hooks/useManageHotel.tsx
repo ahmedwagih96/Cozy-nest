@@ -1,14 +1,21 @@
 import { useForm } from "react-hook-form";
 import { HotelFormData } from "@/types/typings";
+import { HotelType } from "@/types/mongoTypes";
+import { useEffect } from "react";
 
 type Parameters = {
   onSave: (formData: FormData) => void;
+  hotel?: HotelType;
 };
 
-function useManageHotel({ onSave }: Parameters) {
+function useManageHotel({ onSave, hotel }: Parameters) {
   const formMethods = useForm<HotelFormData>();
-  const { handleSubmit } = formMethods;
+  const { handleSubmit, reset } = formMethods;
 
+  useEffect(()=>{
+    reset(hotel);
+  }, [hotel, reset])
+  
   const onSubmit = handleSubmit((hotelData: HotelFormData) => {
     const formData = new FormData();
     formData.append("name", hotelData.name);

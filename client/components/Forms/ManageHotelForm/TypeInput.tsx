@@ -18,6 +18,7 @@ const HotelTypeSection = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
         {hotelTypes.map((type) => (
           <label
+          key={type}
             className={`cursor-pointer bg-blue-300 text-sm rounded-full px-4 py-2 font-semibold ${
               typeWatch === type ? "bg-blue-300" : "bg-gray-300"
             }`}
