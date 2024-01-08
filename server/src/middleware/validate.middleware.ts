@@ -35,7 +35,6 @@ const validateWithJoi =
   (schema: Joi.ObjectSchema) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log(req.body);
       await schema.validateAsync(req.body);
       next();
     } catch (error) {

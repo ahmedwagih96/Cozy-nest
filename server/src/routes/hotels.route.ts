@@ -4,7 +4,10 @@ import {
   ValidateCreateHotel,
   VerifyTokenMiddleware,
 } from "../middleware";
-import { createHotelController } from "../controllers/hotels.controller";
+import {
+  createHotelController,
+  getHotelsByUserController,
+} from "../controllers/hotels.controller";
 
 const router = express.Router();
 
@@ -15,5 +18,7 @@ router.post(
   ValidateCreateHotel,
   createHotelController
 );
+
+router.get("/my-hotels", VerifyTokenMiddleware, getHotelsByUserController);
 
 export default router;

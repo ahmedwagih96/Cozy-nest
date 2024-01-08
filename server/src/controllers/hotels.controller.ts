@@ -4,6 +4,7 @@ import { HotelDocument } from "../shared/types";
 import { ObjectId } from "mongoose";
 import Hotel from "../models/hotel.model";
 import { BadRequestError } from "../errors";
+
 const createHotelController = async (req: Request, res: Response) => {
   const imageFiles = req.files as Express.Multer.File[];
   if (!imageFiles.length) {
@@ -28,4 +29,9 @@ const createHotelController = async (req: Request, res: Response) => {
   res.status(201).json({ hotel });
 };
 
-export { createHotelController };
+const getHotelsByUserController = async (req: Request, res: Response) => {
+  const hotels = await Hotel.find({ user: req.userId });
+  res.status(200).json({ hotels });
+};
+
+export { createHotelController, getHotelsByUserController };
