@@ -31,6 +31,21 @@ const createHotelSchema = Joi.object({
   facilities: Joi.array().required().label("Facilities"),
 });
 
+const editHotelSchema = Joi.object({
+  name: Joi.string().required().label("Name"),
+  city: Joi.string().required().label("City"),
+  country: Joi.string().required().label("Country"),
+  description: Joi.string().required().label("Description"),
+  type: Joi.string().required().label("Type"),
+  pricePerNight: Joi.number().required().label("Price Per Night"),
+  adultCount: Joi.number().required().label("Adult Count"),
+  childCount: Joi.number().required().label("Child Count"),
+  starRating: Joi.number().required().label("Star Rating"),
+  facilities: Joi.array().required().label("Facilities"),
+  imageUrls: Joi.array().required().label('Image Urls')
+});
+
+
 const validateWithJoi =
   (schema: Joi.ObjectSchema) =>
   async (req: Request, res: Response, next: NextFunction) => {
@@ -48,5 +63,6 @@ const validateWithJoi =
 const ValidateUserRegistration = validateWithJoi(userRegistrationSchema);
 const ValidateLoginUser = validateWithJoi(loginUserSchema);
 const ValidateCreateHotel = validateWithJoi(createHotelSchema);
+const ValidateUpdateHotel = validateWithJoi(editHotelSchema);
 
-export { ValidateUserRegistration, ValidateLoginUser, ValidateCreateHotel };
+export { ValidateUserRegistration, ValidateLoginUser, ValidateCreateHotel, ValidateUpdateHotel };

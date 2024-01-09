@@ -17,4 +17,13 @@ const uploadImagesToCloudinary = async (image: Express.Multer.File) => {
   }
 };
 
-export default uploadImagesToCloudinary;
+const deleteImagesFromCloudinary = async (publicIds: string[]) => {
+  try {
+    const result = await cloudinary.api.delete_resources(publicIds);
+    return result;
+  } catch (error) {
+    throw new Error("Internal Server Error");
+  }
+};
+
+export { uploadImagesToCloudinary, deleteImagesFromCloudinary };

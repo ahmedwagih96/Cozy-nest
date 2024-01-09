@@ -3,9 +3,10 @@ import ErrorHandlerMiddleware from "./error.middleware";
 import {
   ValidateUserRegistration,
   ValidateLoginUser,
-  ValidateCreateHotel
+  ValidateCreateHotel,
+  ValidateUpdateHotel
 } from "./validate.middleware";
-import VerifyTokenMiddleware from "./authentication.middleware";
+import {VerifyTokenMiddleware, VerifyHotelOwnership} from "./authentication.middleware";
 import MediaUploadMiddleware from "./mediaHandling.middleware";
 import ValidateObjectId from './validateObjectId.middleware'
 export {
@@ -16,5 +17,7 @@ export {
   VerifyTokenMiddleware,
   MediaUploadMiddleware,
   ValidateCreateHotel,
-  ValidateObjectId
+  ValidateObjectId,
+  VerifyHotelOwnership,
+  ValidateUpdateHotel
 };

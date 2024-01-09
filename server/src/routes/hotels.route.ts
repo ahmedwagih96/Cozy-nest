@@ -3,6 +3,8 @@ import {
   MediaUploadMiddleware,
   ValidateCreateHotel,
   ValidateObjectId,
+  ValidateUpdateHotel,
+  VerifyHotelOwnership,
   VerifyTokenMiddleware,
 } from "../middleware";
 import {
@@ -10,6 +12,7 @@ import {
   getMyHotelsController,
   getHotelByIdController,
   getMyHotelController,
+  updateHotelController,
 } from "../controllers/hotels.controller";
 
 const router = express.Router();
@@ -25,9 +28,17 @@ router.post(
 router.get("/my-hotels", VerifyTokenMiddleware, getMyHotelsController);
 router.get(
   "/my-hotels/:id",
+  VerifyHotelOwnership,
   ValidateObjectId,
-  VerifyTokenMiddleware,
   getMyHotelController
+);
+router.put(
+  "/:id",
+  VerifyHotelOwnership,
+  ValidateObjectId,
+  MediaUploadMiddleware.array("imageFiles"),
+  ValidateUpdateHotel,
+  updateHotelController
 );
 router.get("/:id", ValidateObjectId, getHotelByIdController);
 export default router;

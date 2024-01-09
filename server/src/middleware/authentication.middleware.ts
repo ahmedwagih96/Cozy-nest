@@ -1,11 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { UnauthorizedError } from "../errors";
+import { NotFoundError, UnauthorizedError } from "../errors";
+import Hotel from "../models/hotel.model";
+import { HotelDocument } from "../shared/types";
 
 declare global {
   namespace Express {
     interface Request {
       userId: string;
+      hotel: HotelDocument;
     }
   }
 }
@@ -28,4 +31,22 @@ const VerifyTokenMiddleware = (
   }
 };
 
-export default VerifyTokenMiddleware;
+const VerifyHotelOwnership = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  VerifyTokenMiddleware(req, res, async () => {
+    const hotel = await Hotel.findById(req.params.id);
+    if (!hotel) {
+      throw new NotFoundError("Hotel Not Found");
+    }
+    if (hotel.user.toString() !== req.userId) {
+      throw new UnauthorizedError("Access Denied");
+    }
+    req.hotel = hotel;
+    next();
+  });
+};
+
+export { VerifyTokenMiddleware, VerifyHotelOwnership };
