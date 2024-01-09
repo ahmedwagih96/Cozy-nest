@@ -12,10 +12,10 @@ function useManageHotel({ onSave, hotel }: Parameters) {
   const formMethods = useForm<HotelFormData>();
   const { handleSubmit, reset } = formMethods;
 
-  useEffect(()=>{
+  useEffect(() => {
     reset(hotel);
-  }, [hotel, reset])
-  
+  }, [hotel, reset]);
+
   const onSubmit = handleSubmit((hotelData: HotelFormData) => {
     const formData = new FormData();
     formData.append("name", hotelData.name);
@@ -27,7 +27,13 @@ function useManageHotel({ onSave, hotel }: Parameters) {
     formData.append("starRating", hotelData.starRating.toString());
     formData.append("adultCount", hotelData.adultCount.toString());
     formData.append("childCount", hotelData.childCount.toString());
-
+    if (hotel) {
+      formData.append("hotelId", hotel._id);
+      hotelData.imageUrls.forEach((image, index) => {
+        formData.append(`imageUrls[${index}][url]`, image.url);
+        formData.append(`imageUrls[${index}][publicId]`, image.publicId);
+      });
+    }
     hotelData.facilities.forEach((facility, index) => {
       formData.append(`facilities[${index}]`, facility);
     });
