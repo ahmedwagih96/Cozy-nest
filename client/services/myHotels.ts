@@ -1,13 +1,13 @@
 import { HotelType } from "@/types/mongoTypes";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/my-hotels`;
 
 export const createHotelService = async (
   hotelFormData: FormData
 ): Promise<{
   hotel: HotelType;
 }> => {
-  const response = await fetch(`${API_BASE_URL}/api/hotels`, {
+  const response = await fetch(`${API_BASE_URL}`, {
     method: "POST",
     credentials: "include",
     body: hotelFormData,
@@ -25,7 +25,7 @@ export const createHotelService = async (
 export const fetchMyHotelsService = async (): Promise<{
   hotels: HotelType[];
 }> => {
-  const response = await fetch(`${API_BASE_URL}/api/hotels/my-hotels`, {
+  const response = await fetch(`${API_BASE_URL}`, {
     credentials: "include",
   });
 
@@ -37,12 +37,13 @@ export const fetchMyHotelsService = async (): Promise<{
 
   return responseBody;
 };
+
 export const fetchMyHotelByIdService = async (
   id: string
 ): Promise<{
   hotel: HotelType;
 }> => {
-  const response = await fetch(`${API_BASE_URL}/api/hotels/my-hotels/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/${id}`, {
     credentials: "include",
   });
 
@@ -55,20 +56,6 @@ export const fetchMyHotelByIdService = async (
   return responseBody;
 };
 
-export const fetchHotelByIdService = async (
-  hotelId: string
-): Promise<{ hotel: HotelType }> => {
-  const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`, {
-    credentials: "include",
-  });
-
-  const responseBody = await response.json();
-
-  if (!response.ok) {
-    throw new Error(responseBody.message);
-  }
-  return responseBody;
-};
 
 export const updateHotelService = async (
   hotelFormData: FormData
@@ -76,7 +63,7 @@ export const updateHotelService = async (
   const id = hotelFormData.get("hotelId");
   console.log(id);
   hotelFormData.delete("hotelId");
-  const response = await fetch(`${API_BASE_URL}/api/hotels/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/${id}`, {
     method: "PUT",
     body: hotelFormData,
     credentials: "include",

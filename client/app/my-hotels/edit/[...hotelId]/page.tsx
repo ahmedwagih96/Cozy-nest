@@ -1,12 +1,14 @@
 "use client";
 import { useMutation, useQuery } from "react-query";
 import { useParams } from "next/navigation";
-import { fetchMyHotelByIdService } from "@/services/hotel";
 import { useAppContext } from "@/contexts/AppContext";
 import { ManageHotelForm } from "@/components";
-import { updateHotelService } from "@/services/hotel";
 import { useRouter } from "next/navigation";
 import { HotelType } from "@/types/mongoTypes";
+import {
+  fetchMyHotelByIdService,
+  updateHotelService,
+} from "@/services/myHotels";
 const page = () => {
   const router = useRouter();
   const { hotelId } = useParams();
@@ -24,7 +26,7 @@ const page = () => {
   const { mutate, isLoading } = useMutation(updateHotelService, {
     onSuccess: ({ hotel }: { hotel: HotelType }) => {
       showToast({ message: "Hotel Saved!", type: "SUCCESS" });
-      router.push(`/hotel/${hotel._id}`);
+      router.push(`/hotels/${hotel._id}`);
     },
     onError: (error: Error) => {
       showToast({ message: error.message, type: "ERROR" });

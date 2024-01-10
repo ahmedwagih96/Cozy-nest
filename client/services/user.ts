@@ -1,6 +1,6 @@
 import { RegisterFormData, SignInFormData } from "@/types/typings";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth`;
 
 export const registerService = async (formData: RegisterFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/users/register`, {
@@ -20,7 +20,7 @@ export const registerService = async (formData: RegisterFormData) => {
 };
 
 export const signInService = async (formData: SignInFormData) => {
-  const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+  const response = await fetch(`${API_BASE_URL}/login`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -36,7 +36,7 @@ export const signInService = async (formData: SignInFormData) => {
 };
 
 export const validateTokenService = async () => {
-  const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
+  const response = await fetch(`${API_BASE_URL}/validate-token`, {
     credentials: "include",
   });
   const responseBody = await response.json();
@@ -47,7 +47,7 @@ export const validateTokenService = async () => {
 };
 
 export const signOutService = async () => {
-  const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
+  const response = await fetch(`${API_BASE_URL}/logout`, {
     credentials: "include",
   });
 

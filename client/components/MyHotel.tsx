@@ -6,7 +6,7 @@ import { HotelType } from "@/types/mongoTypes";
 function MyHotel({ hotel }: { hotel: HotelType }) {
   return (
     <div className="flex flex-col justify-between border border-slate-300 rounded-lg p-8 gap-5">
-      <Link href={`/hotel/${hotel._id}`}>
+      <Link href={`/hotels/${hotel._id}`}>
         <h2 className="text-2xl font-bold text-blue-600">{hotel.name}</h2>
       </Link>
       <div className="whitespace-pre-line">{hotel.description}</div>
@@ -29,7 +29,7 @@ function MyHotel({ hotel }: { hotel: HotelType }) {
       </div>
       <span className="flex justify-end">
         <Link
-          href={`/hotel/edit/${hotel._id}`}
+          href={`/my-hotels/edit/${hotel._id}`}
           className="flex bg-blue-600 text-white text-xl font-bold p-2 hover:bg-blue-500 rounded-sm"
         >
           Edit

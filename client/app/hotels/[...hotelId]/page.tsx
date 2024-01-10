@@ -2,8 +2,8 @@
 import { useQuery } from "react-query";
 import { useParams } from "next/navigation";
 import { AiFillStar } from "react-icons/ai";
-import { fetchHotelByIdService } from "@/services/hotel";
 import { useAppContext } from "@/contexts/AppContext";
+import { fetchHotelByIdService } from "@/services/hotels";
 
 const page = () => {
   const { hotelId } = useParams();
