@@ -1,4 +1,4 @@
-import { Document, ObjectId } from "mongoose";
+import { Document, NumberSchemaDefinition, ObjectId } from "mongoose";
 
 interface UserType {
   email: string;
@@ -29,4 +29,14 @@ export interface HotelDocument extends Document {
   pricePerNight: number;
   starRating: number;
   imageUrls: Image[];
+}
+
+export interface SearchResponse {
+  hotels: HotelDocument[];
+  pagination: Pagination;
+}
+
+interface Pagination {
+  total: number;
+  pages: number;
 }
