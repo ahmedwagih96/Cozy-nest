@@ -1,4 +1,4 @@
-import { UserType } from "./mongoTypes";
+import { HotelType, UserType } from "./mongoTypes";
 
 export type RegisterFormData = {
   firstName: string;
@@ -34,7 +34,7 @@ export type HotelFormData = {
   pricePerNight: number;
   starRating: number;
   facilities: string[];
-  imageFiles: FileList
+  imageFiles: FileList;
   imageUrls: Image[];
   adultCount: number;
   childCount: number;
@@ -44,3 +44,24 @@ type Image = {
   url: string;
   publicId: string;
 };
+
+export type SearchQueries = {
+  destination: string;
+  checkIn: Date;
+  checkOut: Date;
+  adultCount: number;
+  childCount: number;
+  hotelId?: string;
+};
+
+export interface PaginationResponse {
+  total: number;
+  pages: number;
+}
+
+export interface FiltersState {
+  hotelType: string[];
+  starRating: string[];
+  maxPrice: number;
+  facilities: string[];
+}

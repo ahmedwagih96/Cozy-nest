@@ -5,6 +5,11 @@ import Footer from "./Footer";
 import Hero from "./Hero";
 import Toast from "./Toast";
 import MyHotel from "./MyHotel";
+import SearchBar from "./SearchBar";
+import Pagination from "./Pagination";
+import SearchResultsCard from "./SearchResultsCard";
+import Sort from "./Sort";
+import Filters from "./Filters";
 // FORMS
 import SignInForm from "./Forms/SignInForm";
 import RegisterForm from "./Forms/RegisterForm";
@@ -33,5 +38,10 @@ export {
   FacilitiesInput,
   MyHotel,
   ExistingImages,
-  SelectedImages
+  SelectedImages,
+  SearchBar,
+  Pagination,
+  SearchResultsCard,
+  Sort,
+  Filters
 };

@@ -11,3 +11,4 @@ export type ManageHotelFormProps = {
   loading: boolean;
   onSave: (hotelFormData: FormData) => void;
 };
+
