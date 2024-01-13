@@ -21,6 +21,7 @@ import GuestsInput from "./Forms/ManageHotelForm/GuestsInput";
 import ExistingImages from "./Forms/ManageHotelForm/ExistingImages";
 import SelectedImages from "./Forms/ManageHotelForm/SelectedImages";
 import FacilitiesInput from "./Forms/ManageHotelForm/FacilitiesInput";
+import GuestInfoForm from "./Forms/GuestInfoForm";
 export {
   Header,
   Footer,
@@ -43,5 +44,6 @@ export {
   Pagination,
   SearchResultsCard,
   Sort,
-  Filters
+  Filters,
+  GuestInfoForm,
 };

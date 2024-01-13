@@ -61,7 +61,6 @@ export const updateHotelService = async (
   hotelFormData: FormData
 ): Promise<{ hotel: HotelType }> => {
   const id = hotelFormData.get("hotelId");
-  console.log(id);
   hotelFormData.delete("hotelId");
   const response = await fetch(`${API_BASE_URL}/${id}`, {
     method: "PUT",

@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { AiFillStar } from "react-icons/ai";
 import { useAppContext } from "@/contexts/AppContext";
 import { fetchHotelByIdService } from "@/services/hotels";
+import { GuestInfoForm } from "@/components";
 
 const page = () => {
   const { hotelId } = useParams();
@@ -53,7 +54,15 @@ const page = () => {
           </div>
         ))}
       </div>
-      <div className="whitespace-pre-line">{data.hotel.description}</div>
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr]">
+        <div className="whitespace-pre-line">{data.hotel.description}</div>
+        <div className="h-fit">
+          <GuestInfoForm
+            pricePerNight={data.hotel.pricePerNight}
+            hotelId={data.hotel._id}
+          />
+        </div>
+      </div>
     </div>
   );
 };
