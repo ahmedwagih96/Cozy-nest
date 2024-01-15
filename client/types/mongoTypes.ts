@@ -29,3 +29,12 @@ interface Image {
   url: string;
   publicId: string;
 }
+
+export interface BookingType extends MongoType {
+  hotel: HotelType;
+  adultCount: number;
+  childCount: number;
+  checkIn: Date;
+  checkOut: Date;
+  totalCost: number;
+}

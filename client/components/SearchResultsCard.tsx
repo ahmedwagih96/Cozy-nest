@@ -46,7 +46,7 @@ const SearchResultsCard = ({ hotel }: { hotel: HotelType }) => {
             </span>
           </div>
           <div className="flex flex-col items-end gap-1">
-            <span className="font-bold">£{hotel.pricePerNight} per night</span>
+            <span className="font-bold">${hotel.pricePerNight} per night</span>
             <Link
               href={`/hotels/${hotel._id}`}
               className="bg-blue-600 text-white h-full p-2 font-bold text-xl max-w-fit hover:bg-blue-500"

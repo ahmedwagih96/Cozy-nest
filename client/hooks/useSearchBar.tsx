@@ -16,7 +16,7 @@ function useSearchBar() {
       ? new Date(params.get("checkOut") as string)
       : new Date(),
     adultCount: Number(params.get("adultCount")) || 1,
-    childCount: Number(params.get("childCount")) || 1,
+    childCount: Number(params.get("childCount")) || 0,
   });
   const handleQueries = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

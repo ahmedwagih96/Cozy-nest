@@ -1,4 +1,5 @@
-import { HotelType } from "./mongoTypes";
+import { HotelType, UserType } from "./mongoTypes";
+import { PaymentIntentResponse } from "./typings";
 
 export type ToastProps = {
   message: string;
@@ -12,3 +13,22 @@ export type ManageHotelFormProps = {
   onSave: (hotelFormData: FormData) => void;
 };
 
+export type BookingDetailsSummaryProps = {
+  bookingDetails: BookingDetails;
+  numberOfNights: number;
+  hotel: HotelType;
+};
+
+export type BookingDetails = {
+  checkIn: Date;
+  checkOut: Date;
+  adultCount: number;
+  childCount: number;
+};
+
+export type BookingFormProps = {
+  user: UserType;
+  paymentIntent: PaymentIntentResponse;
+  hotelId: string;
+  bookingDetails: BookingDetails;
+};

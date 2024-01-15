@@ -43,7 +43,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       queries.set("childCount", String(data.childCount));
     queries.set("adultCount", String(data.adultCount));
     if (user?._id) {
-      router.push(`/booking/${hotelId}/${queries}`);
+      router.push(`/booking/${hotelId}?${queries}`);
     } else {
       router.push(`/sign-in`, {
 
@@ -53,7 +53,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
 
   return (
     <div className="flex flex-col p-4 bg-blue-200 gap-4">
-      <h3 className="text-md font-bold">£{pricePerNight}</h3>
+      <h3 className="text-md font-bold">${pricePerNight}</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 gap-4 items-center">
           <div>

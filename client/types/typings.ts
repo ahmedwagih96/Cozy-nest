@@ -1,4 +1,6 @@
+import { Stripe } from "@stripe/stripe-js";
 import { HotelType, UserType } from "./mongoTypes";
+import { BookingDetails } from "./props";
 
 export type RegisterFormData = {
   firstName: string;
@@ -23,6 +25,7 @@ export type AppContext = {
   signInUser: (user: UserType) => void;
   signOutUser: () => void;
   user: UserType | null;
+  stripePromise: Promise<Stripe | null>;
 };
 
 export type HotelFormData = {
@@ -72,3 +75,16 @@ export type GuestInfoFormData = {
   adultCount: number;
   childCount: number;
 };
+
+export type BookingData = {
+  bookingDetails: BookingDetails,
+  hotelId: string;
+  paymentIntentId: string;
+  totalCost: number;
+};
+
+export interface PaymentIntentResponse {
+  paymentIntentId: string;
+  clientSecret: string;
+  totalCost: number;
+}

@@ -4,8 +4,12 @@ import { Toast } from "@/components";
 import { UserType } from "@/types/mongoTypes";
 import { useQuery } from "react-query";
 import { validateTokenService } from "@/services/user";
+import { loadStripe } from "@stripe/stripe-js";
 
+const STRIPE_PUB_KEY = process.env.NEXT_PUBLIC_STRIPE_PUB_KEY || "";
 const AppContext = React.createContext<AppContext | undefined>(undefined);
+
+const stripePromise = loadStripe(STRIPE_PUB_KEY);
 
 export const AppContextProvider = ({
   children,
@@ -44,6 +48,7 @@ export const AppContextProvider = ({
           setUser(null);
         },
         user,
+        stripePromise,
       }}
     >
       {toast ? (
