@@ -19,14 +19,12 @@ const constructObjectQueries = (queries: any) => {
   }
   // Adult Count
   if (adultCount) {
-    console.log(adultCount);
     objectQuery.adultCount = {
       $gte: parseInt(adultCount),
     };
   }
   // Child Count
   if (childCount) {
-    console.log(childCount);
     objectQuery.pricePerNight = {
       $gte: childCount(childCount),
     };
@@ -39,7 +37,6 @@ const constructObjectQueries = (queries: any) => {
   }
   // Hotel Type
   if (hotelType) {
-    console.log(hotelType.split("-"));
     objectQuery.type = {
       $in: hotelType.split("-").map((type: string) => type),
     };

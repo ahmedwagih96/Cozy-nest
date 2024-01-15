@@ -7,6 +7,8 @@ import userRoutes from "./routes/users.route";
 import authRoutes from "./routes/auth.route";
 import hotelRoutes from "./routes/hotels.route";
 import myHotelsRoutes from "./routes/myHotels.route";
+import paymentRoutes from "./routes/payment.route";
+import bookingRoutes from "./routes/bookings.route";
 import { NotFoundMiddleware, ErrorHandlerMiddleware } from "./middleware";
 import cookieParser from "cookie-parser";
 
@@ -26,6 +28,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/hotels", hotelRoutes);
 app.use("/api/my-hotels", myHotelsRoutes);
+app.use("/api/payments", paymentRoutes);
+app.use("/api/bookings", bookingRoutes);
 
 // middlewares
 app.use(NotFoundMiddleware);

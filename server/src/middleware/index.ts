@@ -9,6 +9,7 @@ import {
 import {VerifyTokenMiddleware, VerifyHotelOwnership} from "./authentication.middleware";
 import MediaUploadMiddleware from "./mediaHandling.middleware";
 import ValidateObjectId from './validateObjectId.middleware'
+import ValidatePaymentIntent from './validatePaymentIntent.middleware'
 export {
   NotFoundMiddleware,
   ErrorHandlerMiddleware,
@@ -19,5 +20,6 @@ export {
   ValidateCreateHotel,
   ValidateObjectId,
   VerifyHotelOwnership,
-  ValidateUpdateHotel
+  ValidateUpdateHotel,
+  ValidatePaymentIntent
 };

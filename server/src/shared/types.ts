@@ -1,4 +1,4 @@
-import { Document, NumberSchemaDefinition, ObjectId } from "mongoose";
+import { Document, ObjectId } from "mongoose";
 
 interface UserType {
   email: string;
@@ -9,6 +9,16 @@ interface UserType {
 
 export interface UserDocument extends Document, UserType {
   generateAuthToken(): string;
+}
+
+export interface BookingDocument extends Document {
+  user: ObjectId;
+  hotel: ObjectId;
+  adultCount: number;
+  childCount: number;
+  checkIn: Date;
+  checkOut: Date;
+  totalCost: number;
 }
 
 interface Image {
@@ -39,4 +49,10 @@ export interface SearchResponse {
 interface Pagination {
   total: number;
   pages: number;
+}
+
+export interface PaymentIntentResponse {
+  paymentIntentId: string;
+  clientSecret: string;
+  totalCost: number;
 }
