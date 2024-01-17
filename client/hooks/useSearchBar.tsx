@@ -2,22 +2,23 @@ import { SearchQueries } from "@/types/typings";
 import { ChangeEvent, useState, FormEvent } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { initialQueriesState } from "@/constants/initialStates";
+import { defaultDate } from "@/utils/getDefaultDate";
 
 function useSearchBar() {
   const params = useSearchParams();
   const router = useRouter();
+
+
+
   // state
   const [queries, setQueries] = useState<SearchQueries>({
     destination: params.get("destination") || "",
-    checkIn: params.get("checkIn")
-      ? new Date(params.get("checkIn") as string)
-      : new Date(),
-    checkOut: params.get("checkOut")
-      ? new Date(params.get("checkOut") as string)
-      : new Date(),
+    checkIn: defaultDate(params, "checkIn"),
+    checkOut: defaultDate(params, "checkOut"),
     adultCount: Number(params.get("adultCount")) || 1,
     childCount: Number(params.get("childCount")) || 0,
   });
+
   const handleQueries = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     if (name === "childCount" || name === "adultCount") {
@@ -39,11 +40,18 @@ function useSearchBar() {
       ...prev,
       [name]: date,
     }));
+    if (name === "checkIn" && queries.checkOut < date) {
+      const newCheckOut = new Date(date);
+      newCheckOut.setDate(newCheckOut.getDate() + 1);
+      setQueries((prev) => ({
+        ...prev,
+        checkOut: newCheckOut,
+      }));
+    }
   };
 
   const clearQueries = () => {
     setQueries(initialQueriesState);
-    router.push(`/search`);
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -58,7 +66,7 @@ function useSearchBar() {
       : current.delete("childCount");
     queries.adultCount
       ? current.set("adultCount", String(queries.adultCount))
-      : current.delete("childCount");
+      : current.delete("adultCount");
     queries.checkIn
       ? current.set("checkIn", queries.checkIn.toISOString())
       : current.delete("checkIn");
