@@ -2,7 +2,6 @@ import Header from "./Header";
 import AuthenticatedLinks from "./Header/AuthenticatedLinks";
 import SignOutButton from "./Header/SignOutButton";
 import Footer from "./Footer";
-import Hero from "./Hero";
 import Toast from "./Toast";
 import MyHotel from "./MyHotel";
 import SearchBar from "./SearchBar";
@@ -26,7 +25,6 @@ import GuestInfoForm from "./Forms/GuestInfoForm";
 export {
   Header,
   Footer,
-  Hero,
   Toast,
   AuthenticatedLinks,
   SignOutButton,

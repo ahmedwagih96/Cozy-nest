@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+main {
+  @apply container mx-auto py-10 flex-1;
+}

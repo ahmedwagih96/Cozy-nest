@@ -25,7 +25,7 @@ const page = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <main className="space-y-6">
       <div>
         <span className="flex">
           {Array.from({ length: data?.hotel.starRating }).map(() => (
@@ -63,7 +63,7 @@ const page = () => {
           />
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

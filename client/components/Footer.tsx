@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="bg-blue-800 py-4">
+    <footer className="bg-blue-800 py-4">
       <div className="container mx-auto flex justify-between items-center">
         <span className="text-xl text-white font-bold tracking-tight">
           CozyNest.com
@@ -10,7 +10,7 @@ const Footer = () => {
           <p className="cursor-pointer text-sm">Terms of Service</p>
         </span>
       </div>
-    </div>
+    </footer>
   );
 };
 

@@ -18,7 +18,7 @@ const page = () => {
   }
 
   return (
-    <div className="space-y-5">
+    <main className="space-y-5">
       <span className="flex justify-between">
         <h1 className="text-3xl font-bold">My Hotels</h1>
         <Link
@@ -33,7 +33,7 @@ const page = () => {
           <MyHotel hotel={hotel} key={hotel._id} />
         ))}
       </div>
-    </div>
+    </main>
   );
 };
 

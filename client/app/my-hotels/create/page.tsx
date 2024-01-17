@@ -22,7 +22,11 @@ function page() {
   const handleSave = (hotelFormData: FormData) => {
     mutate(hotelFormData);
   };
-  return <ManageHotelForm onSave={handleSave} loading={isLoading} />;
+  return (
+    <main>
+      <ManageHotelForm onSave={handleSave} loading={isLoading} />;
+    </main>
+  );
 }
 
 export default page;

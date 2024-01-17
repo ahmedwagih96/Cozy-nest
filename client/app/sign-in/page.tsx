@@ -1,6 +1,10 @@
 import { SignInForm } from "@/components";
 const page = () => {
-  return <SignInForm />;
+  return (
+    <main>
+      <SignInForm />;
+    </main>
+  );
 };
 
 export default page;

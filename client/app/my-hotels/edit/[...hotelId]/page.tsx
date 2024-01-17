@@ -42,11 +42,13 @@ const page = () => {
   }
 
   return (
-    <ManageHotelForm
-      hotel={data.hotel}
-      onSave={handleSave}
-      loading={isLoading}
-    />
+    <main>
+      <ManageHotelForm
+        hotel={data.hotel}
+        onSave={handleSave}
+        loading={isLoading}
+      />
+    </main>
   );
 };
 

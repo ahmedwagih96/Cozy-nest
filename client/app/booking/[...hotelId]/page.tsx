@@ -44,7 +44,7 @@ const Booking = () => {
   }
 
   return (
-    <div className="grid md:grid-cols-[1fr_2fr] gap-4">
+    <main className="grid md:grid-cols-[1fr_2fr] gap-4">
       <BookingDetailsSummary
         bookingDetails={bookingDetails}
         numberOfNights={numberOfNights}
@@ -65,7 +65,7 @@ const Booking = () => {
           />
         </Elements>
       ) : null}
-    </div>
+    </main>
   );
 };
 

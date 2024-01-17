@@ -1,7 +1,11 @@
 import { RegisterForm } from "@/components";
 
 function page() {
-  return <RegisterForm />;
+  return (
+    <main>
+      <RegisterForm />;
+    </main>
+  );
 }
 
 export default page;
