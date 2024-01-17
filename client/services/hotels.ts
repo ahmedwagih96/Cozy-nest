@@ -19,7 +19,7 @@ export const fetchHotelByIdService = async (
 };
 
 export const searchHotelsService = async (
-  params: string
+  params: string = ''
 ): Promise<{hotels: HotelType[], pagination: PaginationResponse}> => {
   const response = await fetch(`${API_BASE_URL}?${params}`);
 

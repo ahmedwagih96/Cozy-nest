@@ -9,7 +9,8 @@ import Pagination from "./Pagination";
 import SearchResultsCard from "./SearchResultsCard";
 import Sort from "./Sort";
 import Filters from "./Filters";
-import BookingDetailsSummary from "./BookingDetialsSummary";
+import BookingDetailsSummary from "./BookingDetailsSummary";
+import LatestDestination from "./LatestDestination";
 // FORMS
 import SignInForm from "./Forms/SignInForm";
 import RegisterForm from "./Forms/RegisterForm";
@@ -45,5 +46,6 @@ export {
   Sort,
   Filters,
   GuestInfoForm,
-  BookingDetailsSummary
+  BookingDetailsSummary,
+  LatestDestination
 };
