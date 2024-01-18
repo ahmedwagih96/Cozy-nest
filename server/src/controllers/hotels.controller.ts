@@ -8,7 +8,6 @@ import {
 } from "../utils/handleQueries";
 
 const getHotelsController = async (req: Request, res: Response) => {
-  
   // filtering
   const constructedQueries = constructObjectQueries(req.query);
 
@@ -26,7 +25,7 @@ const getHotelsController = async (req: Request, res: Response) => {
     .sort(sort)
     .skip(skip)
     .limit(pageSize);
-    
+
   const total = await Hotel.countDocuments(constructedQueries);
 
   const response: SearchResponse = {
@@ -42,7 +41,7 @@ const getHotelController = async (req: Request, res: Response) => {
   if (!hotel) {
     throw new NotFoundError("Hotel Not Found");
   }
-  res.status(200).json({ hotel });
+  res.status(200).json(hotel);
 };
 
 export { getHotelController, getHotelsController };

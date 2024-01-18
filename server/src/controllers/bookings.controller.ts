@@ -15,7 +15,7 @@ const createBookingController = async (req: Request, res: Response) => {
   };
   const booking = new Booking(newBooking);
   await booking.save();
-  res.status(200).send({ booking });
+  res.status(200).send(booking);
 };
 
 const getMyBookingsController = async (req: Request, res: Response) => {

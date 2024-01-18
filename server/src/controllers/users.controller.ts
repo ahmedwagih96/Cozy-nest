@@ -19,7 +19,7 @@ const registerUserController = async (req: Request, res: Response) => {
     maxAge: 30 * 24 * 60 * 1000,
   });
 
-  return res.status(200).json({ message: "User Registered", user });
+  return res.status(200).json(user);
 };
 
 export { registerUserController };

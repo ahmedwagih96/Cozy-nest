@@ -71,6 +71,8 @@ const constructSorting = ({ sort }: any) => {
     case "pricePerNightDesc":
       sortOptions = { pricePerNight: -1 };
       break;
+    default:
+      sortOptions = { createdAt: -1 };
   }
 
   return sortOptions;

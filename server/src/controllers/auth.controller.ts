@@ -24,7 +24,7 @@ const loginUserController = async (req: Request, res: Response) => {
     maxAge: 30 * 24 * 60 * 1000,
   });
   user = await User.findOne({ email });
-  return res.status(200).json({ user });
+  return res.status(200).json(user);
 };
 
 const validateTokenController = async (req: Request, res: Response) => {
@@ -41,7 +41,7 @@ const validateTokenController = async (req: Request, res: Response) => {
     maxAge: 30 * 24 * 60 * 1000,
   });
 
-  res.status(200).send({ user });
+  res.status(200).send(user);
 };
 
 const logOutController = (req: Request, res: Response) => {

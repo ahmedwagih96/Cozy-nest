@@ -29,17 +29,17 @@ const createHotelController = async (req: Request, res: Response) => {
   await hotel.save();
 
   // response to client
-  res.status(201).json({ hotel });
+  res.status(201).json(hotel);
 };
 
 const getMyHotelsController = async (req: Request, res: Response) => {
   const hotels = await Hotel.find({ user: req.userId });
-  res.status(200).json({ hotels });
+  res.status(200).json(hotels);
 };
 
 const getMyHotelController = async (req: Request, res: Response) => {
   const hotel = req.hotel;
-  res.status(200).json({ hotel });
+  res.status(200).json(hotel);
 };
 
 const updateHotelController = async (req: Request, res: Response) => {
@@ -77,7 +77,7 @@ const updateHotelController = async (req: Request, res: Response) => {
     new: true,
   });
 
-  res.status(200).json({ hotel });
+  res.status(200).json(hotel);
 };
 
 export {
