@@ -8,18 +8,23 @@ import BookingForm from "@/components/Forms/BookingForm";
 import useFetchHotel from "@/hooks/useFetchHotel";
 import { BookingDetails } from "@/types/props";
 import { createPaymentIntentService } from "@/services/payment";
+import { defaultDate } from "@/utils/getDefaultDate";
 const Booking = () => {
   const params = useSearchParams();
   const { user, stripePromise } = useAppContext();
-  const { hotelData, isLoading, isFetchHotelError, fetchHotelError } =
-    useFetchHotel();
+  const {
+    hotel,
+    isLoading,
+    isError: isFetchHotelError,
+    error: fetchHotelError,
+  } = useFetchHotel();
   const { hotelId } = useParams();
 
   const bookingDetails: BookingDetails = {
-    checkIn: new Date(params.get("checkIn") as string) || new Date(),
-    checkOut: new Date(params.get("checkOut") as string) || new Date(),
-    childCount: Number(params.get("childCount")) || 1,
-    adultCount: Number(params.get("adultCount")) || 0,
+    checkIn: defaultDate(params, "checkIn"),
+    checkOut: defaultDate(params, "checkOut"),
+    adultCount: Number(params.get("adultCount")) || 1,
+    childCount: Number(params.get("childCount")) || 0,
   };
 
   const numberOfNights: number =
@@ -39,7 +44,7 @@ const Booking = () => {
     }
   );
 
-  if (!hotelData?.hotel) {
+  if (!hotel) {
     return <></>;
   }
 
@@ -48,7 +53,7 @@ const Booking = () => {
       <BookingDetailsSummary
         bookingDetails={bookingDetails}
         numberOfNights={numberOfNights}
-        hotel={hotelData.hotel}
+        hotel={hotel}
       />
       {user && paymentIntentData ? (
         <Elements
@@ -60,7 +65,7 @@ const Booking = () => {
           <BookingForm
             user={user}
             paymentIntent={paymentIntentData}
-            hotelId={hotelData.hotel._id}
+            hotelId={hotel._id}
             bookingDetails={bookingDetails}
           />
         </Elements>

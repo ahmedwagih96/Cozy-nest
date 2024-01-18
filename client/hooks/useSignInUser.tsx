@@ -20,7 +20,7 @@ function useSignInUser() {
   });
 
   const mutation = useMutation(signInService, {
-    onSuccess: async ({ user }: { user: UserType }) => {
+    onSuccess: async (user: UserType) => {
       signInUser(user);
       showToast({ message: "Sign in Successful!", type: "SUCCESS" });
       router.push("/");

@@ -13,7 +13,7 @@ const page = () => {
   const router = useRouter();
   const { hotelId } = useParams();
   const { showToast } = useAppContext();
-  const { data, error } = useQuery(
+  const { data: hotel, error } = useQuery(
     "fetchHotelById",
     () => fetchMyHotelByIdService(hotelId as string),
     {
@@ -24,7 +24,7 @@ const page = () => {
     }
   );
   const { mutate, isLoading } = useMutation(updateHotelService, {
-    onSuccess: ({ hotel }: { hotel: HotelType }) => {
+    onSuccess: (hotel: HotelType) => {
       showToast({ message: "Hotel Saved!", type: "SUCCESS" });
       router.push(`/hotels/${hotel._id}`);
     },
@@ -37,17 +37,13 @@ const page = () => {
     mutate(hotelFormData);
   };
 
-  if (!data?.hotel || error) {
-    return <span>{error?.message}</span>;
+  if (!hotel || error) {
+    return <></>;
   }
 
   return (
     <main>
-      <ManageHotelForm
-        hotel={data.hotel}
-        onSave={handleSave}
-        loading={isLoading}
-      />
+      <ManageHotelForm hotel={hotel} onSave={handleSave} loading={isLoading} />
     </main>
   );
 };

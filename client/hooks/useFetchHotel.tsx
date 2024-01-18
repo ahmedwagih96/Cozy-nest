@@ -7,10 +7,10 @@ function useFetchHotel() {
   const { hotelId } = useParams();
   const { showToast } = useAppContext();
   const {
-    data: hotelData,
+    data: hotel,
     isLoading,
-    isError: isFetchHotelError,
-    error: fetchHotelError
+    isError,
+    error
   } = useQuery(
     "fetchHotelById",
     () => fetchHotelByIdService(hotelId as string),
@@ -22,7 +22,7 @@ function useFetchHotel() {
     }
   );
 
-  return { hotelData, isLoading, isFetchHotelError, fetchHotelError };
+  return { hotel, isLoading, isError, error };
 }
 
 export default useFetchHotel;

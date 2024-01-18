@@ -5,6 +5,7 @@ import { registerService } from "@/services/user";
 import { useAppContext } from "@/contexts/AppContext";
 import { useRouter } from "next/navigation";
 import { UserType } from "@/types/mongoTypes";
+import { initialRegisterFormData } from "@/constants/initialStates";
 function useRegisterUser() {
   const router = useRouter();
   const { showToast, signInUser } = useAppContext();
@@ -14,17 +15,11 @@ function useRegisterUser() {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormData>({
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
+    defaultValues: initialRegisterFormData,
   });
 
   const mutation = useMutation(registerService, {
-    onSuccess: async ({ user }: { user: UserType }) => {
+    onSuccess: async (user: UserType) => {
       signInUser(user);
       showToast({ message: "Registration Success!", type: "SUCCESS" });
       router.push("/");

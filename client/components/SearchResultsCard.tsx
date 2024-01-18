@@ -1,8 +1,10 @@
+"use client";
 import { AiFillStar } from "react-icons/ai";
 import { HotelType } from "@/types/mongoTypes";
 import Link from "next/link";
-
+import { useSearchParams } from "next/navigation";
 const SearchResultsCard = ({ hotel }: { hotel: HotelType }) => {
+  const params = useSearchParams();
   return (
     <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rounded-lg p-8 gap-8">
       <div className="w-full h-[300px]">
@@ -15,14 +17,16 @@ const SearchResultsCard = ({ hotel }: { hotel: HotelType }) => {
         <div>
           <div className="flex items-center">
             <span className="flex">
-              {Array.from({ length: hotel.starRating }).map((_element, index) => (
-                <AiFillStar className="fill-yellow-400" key={index} />
-              ))}
+              {Array.from({ length: hotel.starRating }).map(
+                (_element, index) => (
+                  <AiFillStar className="fill-yellow-400" key={index} />
+                )
+              )}
             </span>
             <span className="ml-1 text-sm">{hotel.type}</span>
           </div>
           <Link
-            href={`/hotels/${hotel._id}`}
+            href={`/hotels/${hotel._id}?${params.toString()}`}
             className="text-2xl font-bold cursor-pointer"
           >
             {hotel.name}
@@ -36,7 +40,10 @@ const SearchResultsCard = ({ hotel }: { hotel: HotelType }) => {
         <div className="grid grid-cols-2 items-end whitespace-nowrap">
           <div className="flex gap-1 items-center">
             {hotel.facilities.slice(0, 3).map((facility) => (
-              <span key={facility} className="bg-slate-300 p-2 rounded-lg font-bold text-xs whitespace-nowrap">
+              <span
+                key={facility}
+                className="bg-slate-300 p-2 rounded-lg font-bold text-xs whitespace-nowrap"
+              >
                 {facility}
               </span>
             ))}
@@ -48,7 +55,7 @@ const SearchResultsCard = ({ hotel }: { hotel: HotelType }) => {
           <div className="flex flex-col items-end gap-1">
             <span className="font-bold">${hotel.pricePerNight} per night</span>
             <Link
-              href={`/hotels/${hotel._id}`}
+              href={`/hotels/${hotel._id}?${params.toString()}`}
               className="bg-blue-600 text-white h-full p-2 font-bold text-xl max-w-fit hover:bg-blue-500"
             >
               View More

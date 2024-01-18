@@ -10,7 +10,7 @@ function page() {
   const { showToast } = useAppContext();
   const router = useRouter();
   const { mutate, isLoading } = useMutation(createHotelService, {
-    onSuccess: ({ hotel }: { hotel: HotelType }) => {
+    onSuccess: (hotel: HotelType) => {
       showToast({ message: "Hotel Saved!", type: "SUCCESS" });
       router.push(`/hotels/${hotel._id}`);
     },

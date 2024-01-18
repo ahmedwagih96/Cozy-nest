@@ -31,7 +31,7 @@ export const AppContextProvider = ({
       setUser(null);
     }
     if (isSuccess) {
-      setUser(data.user);
+      setUser(data);
     }
   }, [isError, isSuccess, data]);
 

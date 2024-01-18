@@ -3,8 +3,9 @@ import { BookingData } from "@/types/typings";
 
 const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/bookings`;
 
-
-export const createRoomBookingService = async (formData: BookingData) => {
+export const createRoomBookingService = async (
+  formData: BookingData
+): Promise<BookingType> => {
   const response = await fetch(`${API_BASE_URL}/${formData.hotelId}`, {
     method: "POST",
     headers: {

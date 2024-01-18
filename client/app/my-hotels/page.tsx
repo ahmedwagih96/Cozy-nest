@@ -7,13 +7,17 @@ import { fetchMyHotelsService } from "@/services/myHotels";
 
 const page = () => {
   const { showToast } = useAppContext();
-  const { data, isLoading } = useQuery("fetchMyHotels", fetchMyHotelsService, {
-    onError: (error: Error) => {
-      showToast({ message: error.message, type: "ERROR" });
-    },
-  });
+  const { data: hotels, isLoading } = useQuery(
+    "fetchMyHotels",
+    fetchMyHotelsService,
+    {
+      onError: (error: Error) => {
+        showToast({ message: error.message, type: "ERROR" });
+      },
+    }
+  );
 
-  if (!isLoading && !data?.hotels.length) {
+  if (!isLoading && !hotels?.length) {
     return <span>You do not have any hotels yet</span>;
   }
 
@@ -29,7 +33,7 @@ const page = () => {
         </Link>
       </span>
       <div className="grid grid-cols-1 gap-8">
-        {data?.hotels.map((hotel) => (
+        {hotels?.map((hotel) => (
           <MyHotel hotel={hotel} key={hotel._id} />
         ))}
       </div>

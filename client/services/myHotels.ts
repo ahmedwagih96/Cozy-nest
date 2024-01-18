@@ -4,9 +4,7 @@ const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/my-hotels`;
 
 export const createHotelService = async (
   hotelFormData: FormData
-): Promise<{
-  hotel: HotelType;
-}> => {
+): Promise<HotelType> => {
   const response = await fetch(`${API_BASE_URL}`, {
     method: "POST",
     credentials: "include",
@@ -22,9 +20,7 @@ export const createHotelService = async (
   return responseBody;
 };
 
-export const fetchMyHotelsService = async (): Promise<{
-  hotels: HotelType[];
-}> => {
+export const fetchMyHotelsService = async (): Promise<HotelType[]> => {
   const response = await fetch(`${API_BASE_URL}`, {
     credentials: "include",
   });
@@ -40,9 +36,7 @@ export const fetchMyHotelsService = async (): Promise<{
 
 export const fetchMyHotelByIdService = async (
   id: string
-): Promise<{
-  hotel: HotelType;
-}> => {
+): Promise<HotelType> => {
   const response = await fetch(`${API_BASE_URL}/${id}`, {
     credentials: "include",
   });
@@ -56,10 +50,9 @@ export const fetchMyHotelByIdService = async (
   return responseBody;
 };
 
-
 export const updateHotelService = async (
   hotelFormData: FormData
-): Promise<{ hotel: HotelType }> => {
+): Promise<HotelType> => {
   const id = hotelFormData.get("hotelId");
   hotelFormData.delete("hotelId");
   const response = await fetch(`${API_BASE_URL}/${id}`, {
