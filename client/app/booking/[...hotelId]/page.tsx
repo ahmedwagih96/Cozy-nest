@@ -1,30 +1,27 @@
-"use client";
-import { useParams, useSearchParams } from "next/navigation";
-import { useQuery } from "react-query";
-import { useAppContext } from "@/contexts/AppContext";
-import { Elements } from "@stripe/react-stripe-js";
-import { BookingDetailsSummary } from "@/components";
-import BookingForm from "@/components/Forms/BookingForm";
-import useFetchHotel from "@/hooks/useFetchHotel";
+import { BookingDetailsSummary, Payment } from "@/components";
 import { BookingDetails } from "@/types/props";
 import { createPaymentIntentService } from "@/services/payment";
-import { defaultDate } from "@/utils/getDefaultDate";
-const Booking = () => {
-  const params = useSearchParams();
-  const { user, stripePromise } = useAppContext();
-  const {
-    hotel,
-    isLoading,
-    isError: isFetchHotelError,
-    error: fetchHotelError,
-  } = useFetchHotel();
-  const { hotelId } = useParams();
+import { defaultDateSSR } from "@/utils/getDefaultDate";
+import { fetchHotelByIdService } from "@/services/hotels";
+type Props = {
+  params: {
+    hotelId: string;
+  };
+  searchParams: {
+    checkIn?: string;
+    checkOut?: string;
+    adultCount?: string;
+    childCount?: string;
+  };
+};
+export default async function page({ params, searchParams }: Props) {
+  const hotel = await fetchHotelByIdService(params.hotelId);
 
   const bookingDetails: BookingDetails = {
-    checkIn: defaultDate(params, "checkIn"),
-    checkOut: defaultDate(params, "checkOut"),
-    adultCount: Number(params.get("adultCount")) || 1,
-    childCount: Number(params.get("childCount")) || 0,
+    checkIn: defaultDateSSR("checkIn", searchParams.checkIn),
+    checkOut: defaultDateSSR("checkOut", searchParams.checkOut),
+    adultCount: Number(searchParams.adultCount) || 1,
+    childCount: Number(searchParams.checkOut) || 0,
   };
 
   const numberOfNights: number =
@@ -35,18 +32,10 @@ const Booking = () => {
         (1000 * 60 * 60 * 24)
     ) || 1;
 
-  const { data: paymentIntentData } = useQuery(
-    "createPaymentIntent",
-    () =>
-      createPaymentIntentService(hotelId as string, numberOfNights.toString()),
-    {
-      enabled: !!hotelId,
-    }
+  const paymentIntentData = await createPaymentIntentService(
+    hotel._id,
+    numberOfNights.toString()
   );
-
-  if (!hotel) {
-    return <></>;
-  }
 
   return (
     <main className="grid md:grid-cols-[1fr_2fr] gap-4">
@@ -55,23 +44,11 @@ const Booking = () => {
         numberOfNights={numberOfNights}
         hotel={hotel}
       />
-      {user && paymentIntentData ? (
-        <Elements
-          stripe={stripePromise}
-          options={{
-            clientSecret: paymentIntentData.clientSecret,
-          }}
-        >
-          <BookingForm
-            user={user}
-            paymentIntent={paymentIntentData}
-            hotelId={hotel._id}
-            bookingDetails={bookingDetails}
-          />
-        </Elements>
-      ) : null}
+      <Payment
+        hotel={hotel}
+        paymentIntentData={paymentIntentData}
+        bookingDetails={bookingDetails}
+      />
     </main>
   );
-};
-
-export default Booking;
+}

@@ -5,7 +5,7 @@ import useFilters from "@/hooks/useFilters";
 function Filters() {
   const { filters, handleFilters } = useFilters();
   return (
-    <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
+    <div className="rounded-lg border border-slate-300 p-5 h-fit md:sticky top-10">
       <div className="space-y-5">
         <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">
           Filter by:

@@ -15,7 +15,7 @@ const SearchResultsCard = ({ hotel }: { hotel: HotelType }) => {
       </div>
       <div className="grid grid-rows-[1fr_2fr_1fr]">
         <div>
-          <div className="flex items-center">
+          <div className="flex items-center gap-1">
             <span className="flex">
               {Array.from({ length: hotel.starRating }).map(
                 (_element, index) => (
@@ -24,6 +24,7 @@ const SearchResultsCard = ({ hotel }: { hotel: HotelType }) => {
               )}
             </span>
             <span className="ml-1 text-sm">{hotel.type}</span>
+            <span className="font-bold">${hotel.pricePerNight} per night</span>
           </div>
           <Link
             href={`/hotels/${hotel._id}?${params.toString()}`}
@@ -34,10 +35,10 @@ const SearchResultsCard = ({ hotel }: { hotel: HotelType }) => {
         </div>
 
         <div>
-          <div className="line-clamp-4">{hotel.description}</div>
+          <div className="line-clamp-2 md:line-clamp-4">{hotel.description}</div>
         </div>
 
-        <div className="grid grid-cols-2 items-end whitespace-nowrap">
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
           <div className="flex gap-1 items-center">
             {hotel.facilities.slice(0, 3).map((facility) => (
               <span
@@ -52,15 +53,12 @@ const SearchResultsCard = ({ hotel }: { hotel: HotelType }) => {
                 `+${hotel.facilities.length - 3} more`}
             </span>
           </div>
-          <div className="flex flex-col items-end gap-1">
-            <span className="font-bold">${hotel.pricePerNight} per night</span>
-            <Link
-              href={`/hotels/${hotel._id}?${params.toString()}`}
-              className="bg-blue-600 text-white h-full p-2 font-bold text-xl max-w-fit hover:bg-blue-500"
-            >
-              View More
-            </Link>
-          </div>
+          <Link
+            href={`/hotels/${hotel._id}?${params.toString()}`}
+            className="bg-blue-600 text-white p-2 font-bold text-xl max-w-fit hover:bg-blue-500 rounded-md"
+          >
+            View More
+          </Link>
         </div>
       </div>
     </div>

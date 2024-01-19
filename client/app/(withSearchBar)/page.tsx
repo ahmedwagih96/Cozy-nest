@@ -1,13 +1,11 @@
-"use client";
 import { LatestDestination } from "@/components";
 import { searchHotelsService } from "@/services/hotels";
-import { useQuery } from "react-query";
 
-const Home = () => {
-  const { data } = useQuery("fetchQuery", () => searchHotelsService());
+export default async function page() {
+  const { hotels } = await searchHotelsService();
 
-  const topRowHotels = data?.hotels?.slice(0, 2) || [];
-  const bottomRowHotels = data?.hotels?.slice(2) || [];
+  const topRowHotels = hotels?.slice(0, 2) || [];
+  const bottomRowHotels = hotels?.slice(2) || [];
 
   return (
     <main className="space-y-3">
@@ -16,17 +14,15 @@ const Home = () => {
       <div className="grid gap-4">
         <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
           {topRowHotels.map((hotel) => (
-            <LatestDestination hotel={hotel} />
+            <LatestDestination hotel={hotel} key={hotel._id} />
           ))}
         </div>
         <div className="grid md:grid-cols-3 gap-4">
           {bottomRowHotels.map((hotel) => (
-            <LatestDestination hotel={hotel} />
+            <LatestDestination hotel={hotel} key={hotel._id}/>
           ))}
         </div>
       </div>
     </main>
   );
-};
-
-export default Home;
+}

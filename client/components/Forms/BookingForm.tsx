@@ -1,5 +1,5 @@
 "use client";
-import { CardElement} from "@stripe/react-stripe-js";
+import { CardElement } from "@stripe/react-stripe-js";
 import { BookingFormProps } from "@/types/props";
 import useMakeBooking from "@/hooks/useMakeBooking";
 
@@ -9,8 +9,11 @@ const BookingForm = ({
   bookingDetails,
   hotelId,
 }: BookingFormProps) => {
-
-  const {handleSubmit, isLoading} = useMakeBooking(paymentIntent, bookingDetails, hotelId)
+  const { handleSubmit, isLoading } = useMakeBooking(
+    paymentIntent,
+    bookingDetails,
+    hotelId
+  );
 
   return (
     <form

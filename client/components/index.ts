@@ -11,6 +11,8 @@ import Sort from "./Sort";
 import Filters from "./Filters";
 import BookingDetailsSummary from "./BookingDetailsSummary";
 import LatestDestination from "./LatestDestination";
+import EditHotel from "./EditHotel";
+import Payment from "./Payment";
 // FORMS
 import SignInForm from "./Forms/SignInForm";
 import RegisterForm from "./Forms/RegisterForm";
@@ -23,6 +25,7 @@ import ExistingImages from "./Forms/ManageHotelForm/ExistingImages";
 import SelectedImages from "./Forms/ManageHotelForm/SelectedImages";
 import FacilitiesInput from "./Forms/ManageHotelForm/FacilitiesInput";
 import GuestInfoForm from "./Forms/GuestInfoForm";
+import BookingForm from "./Forms/BookingForm";
 export {
   Header,
   Footer,
@@ -47,5 +50,8 @@ export {
   Filters,
   GuestInfoForm,
   BookingDetailsSummary,
-  LatestDestination
+  LatestDestination,
+  EditHotel,
+  Payment,
+  BookingForm
 };

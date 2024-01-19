@@ -60,7 +60,7 @@ function useFilters() {
       current.delete("pageNumber");
     }
     const query = current.toString();
-    router.push(`/search?${query}`);
+    router.push(`/search?${query}`, { scroll: false });
   };
 
   return {

@@ -21,8 +21,15 @@ export const hotelFacilities: string[] = [
   "Parking",
   "Airport Shuttle",
   "Family Rooms",
-  "Non-Smoking Rooms",
+  "Smoking Rooms",
   "Outdoor Pool",
   "Spa",
   "Fitness Center",
 ];
+
+export const sortOptions = {
+  newest: "Sort By",
+  starRating: "Star Rating",
+  pricePerNightAsc: "Price Per Night (low to high)",
+  pricePerNightDesc: "Price Per Night (low to high)",
+};

@@ -3,20 +3,19 @@ import { useSearchParams, useRouter } from "next/navigation";
 function Sort() {
   const params = useSearchParams();
   const router = useRouter();
-  let sort: string = params.get("sort") || "";
+  let currentSort: string = params.get("sort") || "";
 
   const handleSorting = (newSort: string) => {
-    sort = newSort;
     const current = new URLSearchParams(Array.from(params.entries()));
-    sort ? current.set("sort", newSort) : current.delete("sort");
+    newSort ? current.set("sort", newSort) : current.delete("sort");
     const query = current.toString();
-    router.push(`/search?${query}`);
+    router.push(`/search?${query}`, { scroll: false });
   };
 
   return (
     <select
-      className="p-2 border rounded-md"
-      value={sort}
+      className="p-2 border rounded-md max-w-[300px] ml-auto outline-none"
+      value={currentSort}
       onChange={(e) => handleSorting(e.target.value)}
     >
       <option value="">Sort By</option>

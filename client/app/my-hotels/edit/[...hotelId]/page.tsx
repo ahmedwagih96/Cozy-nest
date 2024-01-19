@@ -1,51 +1,18 @@
-"use client";
-import { useMutation, useQuery } from "react-query";
-import { useParams } from "next/navigation";
-import { useAppContext } from "@/contexts/AppContext";
-import { ManageHotelForm } from "@/components";
-import { useRouter } from "next/navigation";
-import { HotelType } from "@/types/mongoTypes";
-import {
-  fetchMyHotelByIdService,
-  updateHotelService,
-} from "@/services/myHotels";
-const page = () => {
-  const router = useRouter();
-  const { hotelId } = useParams();
-  const { showToast } = useAppContext();
-  const { data: hotel, error } = useQuery(
-    "fetchHotelById",
-    () => fetchMyHotelByIdService(hotelId as string),
-    {
-      enabled: !!hotelId,
-      onError: (error: Error) => {
-        showToast({ message: error.message, type: "ERROR" });
-      },
-    }
-  );
-  const { mutate, isLoading } = useMutation(updateHotelService, {
-    onSuccess: (hotel: HotelType) => {
-      showToast({ message: "Hotel Saved!", type: "SUCCESS" });
-      router.push(`/hotels/${hotel._id}`);
-    },
-    onError: (error: Error) => {
-      showToast({ message: error.message, type: "ERROR" });
-    },
-  });
+import { EditHotel } from "@/components";
+import { fetchMyHotelByIdService } from "@/services/serverSide";
 
-  const handleSave = (hotelFormData: FormData) => {
-    mutate(hotelFormData);
+type Props = {
+  params: {
+    hotelId: string;
   };
+};
 
-  if (!hotel || error) {
-    return <></>;
-  }
+export default async function page({ params }: Props) {
+  const hotel = await fetchMyHotelByIdService(params.hotelId);
 
   return (
     <main>
-      <ManageHotelForm hotel={hotel} onSave={handleSave} loading={isLoading} />
+      <EditHotel hotel={hotel} />
     </main>
   );
-};
-
-export default page;
+}

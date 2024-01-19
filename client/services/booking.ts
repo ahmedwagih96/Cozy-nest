@@ -22,14 +22,3 @@ export const createRoomBookingService = async (
   return responseBody;
 };
 
-export const fetchMyBookingsService = async (): Promise<BookingType[]> => {
-  const response = await fetch(`${API_BASE_URL}`, {
-    credentials: "include",
-  });
-  const responseBody = await response.json();
-  if (!response.ok) {
-    throw new Error(responseBody);
-  }
-
-  return responseBody;
-};

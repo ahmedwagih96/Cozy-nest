@@ -25,7 +25,6 @@ export type AppContext = {
   signInUser: (user: UserType) => void;
   signOutUser: () => void;
   user: UserType | null;
-  stripePromise: Promise<Stripe | null>;
 };
 
 export type HotelFormData = {
@@ -88,3 +87,17 @@ export interface PaymentIntentResponse {
   clientSecret: string;
   totalCost: number;
 }
+
+export type SearchParamsQueries = {
+  checkIn?: string;
+  checkOut?: string;
+  adultCount?: string;
+  childCount?: string;
+  hotelType?: string;
+  starRating?: string;
+  maxPrice?: string;
+  facilities?: string;
+  pageNumber?: string;
+  sort?: string;
+  destination?: string
+};

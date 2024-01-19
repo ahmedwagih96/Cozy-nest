@@ -1,25 +1,9 @@
-"use client";
-import { useQuery } from "react-query";
 import Link from "next/link";
 import { MyHotel } from "@/components";
-import { useAppContext } from "@/contexts/AppContext";
-import { fetchMyHotelsService } from "@/services/myHotels";
+import { fetchMyHotelsService } from "@/services/serverSide";
 
-const page = () => {
-  const { showToast } = useAppContext();
-  const { data: hotels, isLoading } = useQuery(
-    "fetchMyHotels",
-    fetchMyHotelsService,
-    {
-      onError: (error: Error) => {
-        showToast({ message: error.message, type: "ERROR" });
-      },
-    }
-  );
-
-  if (!isLoading && !hotels?.length) {
-    return <span>You do not have any hotels yet</span>;
-  }
+export default async function page() {
+  const hotels = await fetchMyHotelsService();
 
   return (
     <main className="space-y-5">
@@ -39,6 +23,4 @@ const page = () => {
       </div>
     </main>
   );
-};
-
-export default page;
+}
