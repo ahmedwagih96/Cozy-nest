@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { SignOutButton } from "@/components";
-function AuthenticatedLinks() {
+function LargeNav() {
   return (
-    <>
+    <ul className="hidden md:flex space-x-2">
       <Link
         className="flex items-center text-white px-3 font-bold hover:bg-blue-600 rounded-md"
         href="/my-bookings"
@@ -16,8 +16,8 @@ function AuthenticatedLinks() {
         My Hotels
       </Link>
       <SignOutButton />
-    </>
+    </ul>
   );
 }
 
-export default AuthenticatedLinks;
+export default LargeNav;

@@ -1,6 +1,9 @@
 import Header from "./Header";
-import AuthenticatedLinks from "./Header/AuthenticatedLinks";
+import LargeNav from "./Header/LargeNav";
+import GuestNav from "./Header/GuestNav";
 import SignOutButton from "./Header/SignOutButton";
+import MobileNav from "./Header/MobileNav";
+import Dropdown from "./Header/Dropdown";
 import Footer from "./Footer";
 import Toast from "./Toast";
 import MyHotel from "./MyHotel";
@@ -30,7 +33,7 @@ export {
   Header,
   Footer,
   Toast,
-  AuthenticatedLinks,
+  LargeNav,
   SignOutButton,
   SignInForm,
   RegisterForm,
@@ -53,5 +56,8 @@ export {
   LatestDestination,
   EditHotel,
   Payment,
-  BookingForm
+  BookingForm,
+  MobileNav,
+  Dropdown,
+  GuestNav
 };
