@@ -11,7 +11,8 @@ export const fetchMyHotelsService = async (): Promise<HotelType[]> => {
   const responseBody = await response.json();
 
   if (!response.ok) {
-    throw new Error(responseBody.message);
+    const errMsg = `${response.status}-${responseBody.message}`;
+    throw new Error(errMsg);
   }
 
   return responseBody;
@@ -27,7 +28,8 @@ export const fetchMyHotelByIdService = async (
   const responseBody = await response.json();
 
   if (!response.ok) {
-    throw new Error(responseBody.message);
+    const errMsg = `${response.status}-${responseBody.message}`;
+    throw new Error(errMsg);
   }
 
   return responseBody;
@@ -39,7 +41,8 @@ export const fetchMyBookingsService = async (): Promise<BookingType[]> => {
   });
   const responseBody = await response.json();
   if (!response.ok) {
-    throw new Error(responseBody.message);
+    const errMsg = `${response.status}-${responseBody.message}`;
+    throw new Error(errMsg);
   }
 
   return responseBody;
