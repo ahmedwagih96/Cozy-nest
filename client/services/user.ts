@@ -38,23 +38,15 @@ export const signInService = async (formData: SignInFormData): Promise<UserType>
   return responseBody;
 };
 
-export const validateTokenService = async (): Promise<UserType>  => {
-  const response = await fetch(`${API_BASE_URL}/validate-token`, {
-    credentials: "include",
-  });
-  const responseBody = await response.json();
-  if (!response.ok) {
-    throw new Error(responseBody.message);
-  }
-  return responseBody;
-};
 
 export const signOutService = async () => {
   const response = await fetch(`${API_BASE_URL}/logout`, {
     credentials: "include",
   });
 
+  const responseBody = await response.json()
+
   if (!response.ok) {
-    throw new Error("Error during sign out");
+    throw new Error(responseBody.message);
   }
 };

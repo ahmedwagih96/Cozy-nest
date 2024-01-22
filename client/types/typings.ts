@@ -1,5 +1,3 @@
-import { Stripe } from "@stripe/stripe-js";
-import { HotelType, UserType } from "./mongoTypes";
 import { BookingDetails } from "./props";
 
 export type RegisterFormData = {
@@ -15,17 +13,6 @@ export type SignInFormData = {
   password: string;
 };
 
-export type ToastMessage = {
-  message: string;
-  type: "SUCCESS" | "ERROR";
-};
-
-export type AppContext = {
-  showToast: (toastMessage: ToastMessage) => void;
-  signInUser: (user: UserType) => void;
-  signOutUser: () => void;
-  user: UserType | null;
-};
 
 export type HotelFormData = {
   name: string;

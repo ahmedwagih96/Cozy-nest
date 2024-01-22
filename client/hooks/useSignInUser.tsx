@@ -2,12 +2,10 @@ import { SignInFormData } from "@/types/typings";
 import { useForm } from "react-hook-form";
 import { signInService } from "@/services/user";
 import { useMutation } from "react-query";
-import { useAppContext } from "@/contexts/AppContext";
 import { useRouter } from "next/navigation";
-import { UserType } from "@/types/mongoTypes";
+import { toast } from "react-toastify";
 function useSignInUser() {
   const router = useRouter();
-  const { showToast, signInUser } = useAppContext();
   const {
     register,
     handleSubmit,
@@ -20,13 +18,11 @@ function useSignInUser() {
   });
 
   const mutation = useMutation(signInService, {
-    onSuccess: async (user: UserType) => {
-      signInUser(user);
-      showToast({ message: "Sign in Successful!", type: "SUCCESS" });
-      router.push("/");
+    onSuccess: async () => {
+      router.refresh();
     },
     onError: (error: Error) => {
-      showToast({ message: error.message, type: "ERROR" });
+      toast.error(error.message);
     },
   });
 

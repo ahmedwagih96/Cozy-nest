@@ -1,11 +1,9 @@
 import { useForm } from "react-hook-form";
-import { useAppContext } from "@/contexts/AppContext";
 import { useRouter, useSearchParams, useParams } from "next/navigation";
 import { GuestInfoFormData } from "@/types/typings";
 import { defaultDate } from "@/utils/getDefaultDate";
 
 function useGuestForm() {
-  const { user } = useAppContext();
   const router = useRouter();
   const searchParams = useSearchParams();
   const { hotelId } = useParams();
@@ -42,11 +40,7 @@ function useGuestForm() {
       queries.set("checkOut", data.checkOut.toISOString()),
       queries.set("childCount", String(data.childCount));
     queries.set("adultCount", String(data.adultCount));
-    if (user?._id) {
-      router.push(`/booking/${hotelId}?${queries}`);
-    } else {
-      router.push(`/sign-in`);
-    }
+    router.push(`/booking/${hotelId}?${queries}`);
   };
 
   return {

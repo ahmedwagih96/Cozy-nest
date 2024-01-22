@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Footer, Header, SearchBar } from "@/components";
+import { Footer } from "@/components";
 import Providers from "./providers";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Header from "@/components/Header";
 export const metadata: Metadata = {
   title: "Cozy Nest",
   description: "Hotel Booking Web App",
@@ -15,13 +17,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Providers>
-        <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen">
+        <ToastContainer theme="colored" position="top-center" />
+        <Providers>
           <Header />
           {children}
           <Footer />
-        </body>
-      </Providers>
+        </Providers>
+      </body>
     </html>
   );
 }

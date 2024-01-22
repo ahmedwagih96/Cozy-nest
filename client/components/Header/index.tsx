@@ -1,10 +1,9 @@
-"use client";
-import { useAppContext } from "@/contexts/AppContext";
 import Link from "next/link";
 import { GuestNav, LargeNav, MobileNav } from "@/components";
+import { isAuthenticated } from "@/services/auth";
 
-const Header = () => {
-  const { user } = useAppContext();
+export default async function Header() {
+  const user = await isAuthenticated();
   return (
     <header className="bg-blue-800 py-4 z-10">
       <div className="container mx-auto flex justify-between items-center">
@@ -14,7 +13,7 @@ const Header = () => {
         </span>
         {/* NAVIGATION */}
         <nav>
-          {user?._id ? (
+          {user ? (
             <>
               <MobileNav />
               <LargeNav />
@@ -26,6 +25,4 @@ const Header = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}

@@ -2,13 +2,11 @@ import { RegisterFormData } from "@/types/typings";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { registerService } from "@/services/user";
-import { useAppContext } from "@/contexts/AppContext";
-import { useRouter } from "next/navigation";
-import { UserType } from "@/types/mongoTypes";
 import { initialRegisterFormData } from "@/constants/initialStates";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 function useRegisterUser() {
   const router = useRouter();
-  const { showToast, signInUser } = useAppContext();
   const {
     register,
     watch,
@@ -19,13 +17,11 @@ function useRegisterUser() {
   });
 
   const mutation = useMutation(registerService, {
-    onSuccess: async (user: UserType) => {
-      signInUser(user);
-      showToast({ message: "Registration Success!", type: "SUCCESS" });
-      router.push("/");
+    onSuccess: async () => {
+      router.refresh();
     },
     onError: (error: Error) => {
-      showToast({ message: error.message, type: "ERROR" });
+      toast.error(error.message);
     },
   });
   const onSubmit = handleSubmit((data) => {

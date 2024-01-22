@@ -1,5 +1,4 @@
 "use client";
-import { AppContextProvider } from "@/contexts/AppContext";
 import { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -18,7 +17,7 @@ const queryClient = new QueryClient({
 function Providers({ children }: ProvidersProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <AppContextProvider>{children}</AppContextProvider>
+      {children}
     </QueryClientProvider>
   );
 }

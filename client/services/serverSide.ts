@@ -1,4 +1,4 @@
-import { BookingType, HotelType, UserType } from "@/types/mongoTypes";
+import { BookingType, HotelType } from "@/types/mongoTypes";
 import { cookies } from "next/headers";
 
 const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api`;

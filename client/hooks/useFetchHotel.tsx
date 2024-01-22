@@ -1,23 +1,22 @@
 import { useParams } from "next/navigation";
 import { useQuery } from "react-query";
-import { useAppContext } from "@/contexts/AppContext";
 import { fetchHotelByIdService } from "@/services/hotels";
+import { toast } from "react-toastify";
 
 function useFetchHotel() {
   const { hotelId } = useParams();
-  const { showToast } = useAppContext();
   const {
     data: hotel,
     isLoading,
     isError,
-    error
+    error,
   } = useQuery(
     "fetchHotelById",
     () => fetchHotelByIdService(hotelId as string),
     {
       enabled: !!hotelId,
       onError: (error: Error) => {
-        showToast({ message: error.message, type: "ERROR" });
+        toast.error(error.message);
       },
     }
   );

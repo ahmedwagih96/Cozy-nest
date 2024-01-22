@@ -1,4 +1,3 @@
-import Header from "./Header";
 import LargeNav from "./Header/LargeNav";
 import GuestNav from "./Header/GuestNav";
 import SignOutButton from "./Header/SignOutButton";
@@ -30,7 +29,6 @@ import FacilitiesInput from "./Forms/ManageHotelForm/FacilitiesInput";
 import GuestInfoForm from "./Forms/GuestInfoForm";
 import BookingForm from "./Forms/BookingForm";
 export {
-  Header,
   Footer,
   Toast,
   LargeNav,

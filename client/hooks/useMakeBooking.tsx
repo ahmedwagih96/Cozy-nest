@@ -5,8 +5,8 @@ import { BookingData, PaymentIntentResponse } from "@/types/typings";
 import { BookingDetails } from "@/types/props";
 import { createRoomBookingService } from "@/services/booking";
 import { FormEvent } from "react";
-import { useAppContext } from "@/contexts/AppContext";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 function useMakeBooking(
   paymentIntent: PaymentIntentResponse,
   bookingDetails: BookingDetails,
@@ -16,17 +16,15 @@ function useMakeBooking(
   const stripe = useStripe();
   const elements = useElements();
 
-  const { showToast } = useAppContext();
-
   const { mutate: bookRoom, isLoading } = useMutation(
     createRoomBookingService,
     {
       onSuccess: () => {
-        showToast({ message: "Booking Saved!", type: "SUCCESS" });
+        toast.success("Booking Saved");
         router.push("/my-bookings");
       },
       onError: (error: Error) => {
-        showToast({ message: error.message, type: "ERROR" });
+        toast.error(error.message);
       },
     }
   );
