@@ -15,7 +15,7 @@ const getHotelsController = async (req: Request, res: Response) => {
   const sort = constructSorting(req.query);
 
   // Pagination
-  const pageSize = 3;
+  const pageSize = Number(req.query.limit) || 3;
   const page = parseInt(
     req.query.pageNumber ? req.query.pageNumber.toString() : "1"
   );
