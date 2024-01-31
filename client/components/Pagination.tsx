@@ -1,5 +1,5 @@
 "use client";
-
+import * as NProgress from "nprogress";
 import { useSearchParams, useRouter } from "next/navigation";
 
 const Pagination = ({ pages }: { pages: number }) => {
@@ -14,6 +14,7 @@ const Pagination = ({ pages }: { pages: number }) => {
   }
 
   const handleChangePage = (page: number) => {
+    NProgress.start();
     pageNumber = page;
     const current = new URLSearchParams(Array.from(params.entries()));
     current.set("pageNumber", String(page));

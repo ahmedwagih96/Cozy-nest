@@ -16,7 +16,7 @@ function useRegisterUser() {
     defaultValues: initialRegisterFormData,
   });
 
-  const mutation = useMutation(registerService, {
+  const { mutate, isLoading } = useMutation(registerService, {
     onSuccess: async () => {
       router.refresh();
     },
@@ -25,13 +25,14 @@ function useRegisterUser() {
     },
   });
   const onSubmit = handleSubmit((data) => {
-    mutation.mutate(data);
+    mutate(data);
   });
 
   return {
     onSubmit,
     errors,
     watch,
+    isLoading,
     register,
   };
 }

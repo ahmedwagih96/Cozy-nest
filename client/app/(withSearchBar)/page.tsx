@@ -2,7 +2,7 @@ import { LatestDestination } from "@/components";
 import { searchHotelsService } from "@/services/hotels";
 
 export default async function page() {
-  const { hotels } = await searchHotelsService();
+  const { hotels } = await searchHotelsService("limit=6");
 
   const topRowHotels = hotels?.slice(0, 2) || [];
   const bottomRowHotels = hotels?.slice(2) || [];
@@ -19,7 +19,7 @@ export default async function page() {
         </div>
         <div className="grid md:grid-cols-3 gap-4">
           {bottomRowHotels.map((hotel) => (
-            <LatestDestination hotel={hotel} key={hotel._id}/>
+            <LatestDestination hotel={hotel} key={hotel._id} />
           ))}
         </div>
       </div>

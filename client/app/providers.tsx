@@ -1,6 +1,8 @@
 "use client";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { usePathname, useSearchParams } from "next/navigation";
+import * as NProgress from "nprogress";
 
 interface ProvidersProps {
   children: ReactNode;
@@ -15,10 +17,15 @@ const queryClient = new QueryClient({
 });
 
 function Providers({ children }: ProvidersProps) {
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    NProgress.done();
+  }, [pathName, searchParams]);
+
   return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-    </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 }
 

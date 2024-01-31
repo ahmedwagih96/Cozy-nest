@@ -3,6 +3,7 @@ import { ChangeEvent, useState, FormEvent } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { initialQueriesState } from "@/constants/initialStates";
 import { defaultDate } from "@/utils/getDefaultDate";
+import * as NProgress from "nprogress";
 
 function useSearchBar() {
   const params = useSearchParams();
@@ -55,6 +56,7 @@ function useSearchBar() {
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    NProgress.start();
     e.preventDefault();
     const current = new URLSearchParams(Array.from(params.entries()));
 

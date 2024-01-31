@@ -1,6 +1,7 @@
 import { FiltersState } from "@/types/typings";
 import { ChangeEvent } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import * as NProgress from "nprogress";
 function useFilters() {
   const params = useSearchParams();
   const router = useRouter();
@@ -38,6 +39,7 @@ function useFilters() {
   };
 
   const updateQueries = (name: string) => {
+    NProgress.start();
     const current = new URLSearchParams(Array.from(params.entries()));
     switch (name) {
       case "hotelType":

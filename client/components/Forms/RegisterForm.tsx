@@ -2,7 +2,7 @@
 import useRegisterUser from "@/hooks/useRegisterUser";
 
 const RegisterForm = () => {
-  const { onSubmit, register, watch, errors } = useRegisterUser();
+  const { onSubmit, register, watch, errors, isLoading } = useRegisterUser();
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
       <h2 className="text-3xl font-bold">Create an Account</h2>
@@ -78,9 +78,10 @@ const RegisterForm = () => {
       <span>
         <button
           type="submit"
+          disabled={isLoading}
           className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl rounded-md"
         >
-          Create Account
+          {isLoading ? "Loading..." : "Create Account"}
         </button>
       </span>
     </form>

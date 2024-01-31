@@ -1,11 +1,13 @@
 "use client";
 import { useSearchParams, useRouter } from "next/navigation";
+import * as NProgress from "nprogress";
 function Sort() {
   const params = useSearchParams();
   const router = useRouter();
   let currentSort: string = params.get("sort") || "";
 
   const handleSorting = (newSort: string) => {
+    NProgress.start();
     const current = new URLSearchParams(Array.from(params.entries()));
     newSort ? current.set("sort", newSort) : current.delete("sort");
     const query = current.toString();

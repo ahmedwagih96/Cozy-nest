@@ -5,6 +5,9 @@ import Providers from "./providers";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "@/components/Header";
+
+import NextTopLoader from "nextjs-toploader";
+
 export const metadata: Metadata = {
   title: "Cozy Nest",
   description: "Hotel Booking Web App",
@@ -18,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen">
+      <NextTopLoader color="#fb923c" />
         <ToastContainer theme="colored" position="top-center" />
         <Providers>
           <Header />

@@ -2,8 +2,10 @@ import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams, useParams } from "next/navigation";
 import { GuestInfoFormData } from "@/types/typings";
 import { defaultDate } from "@/utils/getDefaultDate";
-
+import * as NProgress from "nprogress";
+import { useState } from "react";
 function useGuestForm() {
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const { hotelId } = useParams();
@@ -35,6 +37,8 @@ function useGuestForm() {
   };
 
   const onSubmit = (data: GuestInfoFormData) => {
+    setLoading(true);
+    NProgress.start();
     const queries = new URLSearchParams();
     queries.set("checkIn", data.checkIn.toISOString()),
       queries.set("checkOut", data.checkOut.toISOString()),
@@ -51,6 +55,7 @@ function useGuestForm() {
     checkIn,
     checkOut,
     errors,
+    loading,
   };
 }
 

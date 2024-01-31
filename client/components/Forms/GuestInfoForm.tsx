@@ -11,6 +11,7 @@ const GuestInfoForm = ({ pricePerNight }: { pricePerNight: number }) => {
     checkIn,
     checkOut,
     errors,
+    loading,
   } = useGuestForm();
 
   const minDate = new Date();
@@ -85,10 +86,11 @@ const GuestInfoForm = ({ pricePerNight }: { pricePerNight: number }) => {
             ) : null}
           </div>
           <button
+            disabled={loading}
             type="submit"
             className="bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl"
           >
-            Book Now
+            {loading ? "Loading..." : "Book Now"}
           </button>
         </div>
       </form>

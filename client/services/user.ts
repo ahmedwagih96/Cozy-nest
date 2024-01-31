@@ -1,12 +1,12 @@
 import { UserType } from "@/types/mongoTypes";
 import { RegisterFormData, SignInFormData } from "@/types/typings";
 
-const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth`;
+const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api`;
 
 export const registerService = async (
   formData: RegisterFormData
 ): Promise<UserType> => {
-  const response = await fetch(`${API_BASE_URL}/api/users/register`, {
+  const response = await fetch(`${API_BASE_URL}/users/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export const registerService = async (
 };
 
 export const signInService = async (formData: SignInFormData): Promise<UserType> => {
-  const response = await fetch(`${API_BASE_URL}/login`, {
+  const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -40,7 +40,7 @@ export const signInService = async (formData: SignInFormData): Promise<UserType>
 
 
 export const signOutService = async () => {
-  const response = await fetch(`${API_BASE_URL}/logout`, {
+  const response = await fetch(`${API_BASE_URL}/auth/logout`, {
     credentials: "include",
   });
 

@@ -12,6 +12,7 @@ const SignOutButton = ({ mobile }: { mobile?: boolean }) => {
 
   const mutation = useMutation(signOutService, {
     onSuccess: async () => {
+      router.push("/");
       router.refresh();
     },
     onError: (error: Error) => {

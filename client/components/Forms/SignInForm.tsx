@@ -2,7 +2,7 @@
 import useSignInUser from "@/hooks/useSignInUser";
 import Link from "next/link";
 const SignInForm = () => {
-  const { onSubmit, errors, register } = useSignInUser();
+  const { onSubmit, errors, register, isLoading } = useSignInUser();
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
       <h2 className="text-3xl font-bold">Sign In</h2>
@@ -36,10 +36,11 @@ const SignInForm = () => {
       </label>
       <span className="flex items-center justify-between">
         <button
+          disabled={isLoading}
           type="submit"
           className="bg-blue-600 text-white py-2 px-3 font-bold hover:bg-blue-500 text-xl rounded-md"
         >
-          Login
+          {isLoading ? "Loading..." : "Sign In"}
         </button>
         <span className="text-sm">
           Don't have an account?{" "}

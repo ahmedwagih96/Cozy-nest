@@ -17,8 +17,9 @@ function useSignInUser() {
     },
   });
 
-  const mutation = useMutation(signInService, {
+  const { mutate, isLoading } = useMutation(signInService, {
     onSuccess: async () => {
+      router.push('/')
       router.refresh();
     },
     onError: (error: Error) => {
@@ -27,13 +28,14 @@ function useSignInUser() {
   });
 
   const onSubmit = handleSubmit((data) => {
-    mutation.mutate(data);
+    mutate(data);
   });
 
   return {
     onSubmit,
     errors,
     register,
+    isLoading,
   };
 }
 
