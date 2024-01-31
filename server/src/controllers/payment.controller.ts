@@ -2,7 +2,7 @@ import Stripe from "stripe";
 import { Request, Response } from "express";
 import Hotel from "../models/hotel.model";
 import { BadRequestError, NotFoundError } from "../errors";
-import { PaymentIntentResponse } from "../shared/types";
+import { PaymentIntentResponse } from "../types/types";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 

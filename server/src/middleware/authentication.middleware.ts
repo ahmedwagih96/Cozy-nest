@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { NotFoundError, UnauthorizedError } from "../errors";
 import Hotel from "../models/hotel.model";
-import { HotelDocument } from "../shared/types";
+import { HotelDocument } from "../types/types";
 
 declare global {
   namespace Express {

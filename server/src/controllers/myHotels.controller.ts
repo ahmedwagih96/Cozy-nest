@@ -3,7 +3,7 @@ import {
   uploadImagesToCloudinary,
   deleteImagesFromCloudinary,
 } from "../utils/cloudinary";
-import { HotelDocument } from "../shared/types";
+import { HotelDocument } from "../types/types";
 import { ObjectId } from "mongoose";
 import Hotel from "../models/hotel.model";
 import { BadRequestError } from "../errors";

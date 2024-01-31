@@ -1,0 +1,1 @@
+{"version":3,"file":"hotels.route.js","sourceRoot":"","sources":["../../src/routes/hotels.route.ts"],"names":[],"mappings":";;;;;AAAA,sDAA8B;AAC9B,8CAAiD;AACjD,wEAA2F;AAE3F,MAAM,MAAM,GAAG,iBAAO,CAAC,MAAM,EAAE,CAAC;AAEhC,kBAAkB;AAClB,MAAM,CAAC,GAAG,CAAC,GAAG,EAAE,uCAAmB,CAAC,CAAC;AAErC,mBAAmB;AACnB,MAAM,CAAC,GAAG,CAAC,MAAM,EAAE,6BAAgB,EAAE,sCAAkB,CAAC,CAAC;AAEzD,kBAAe,MAAM,CAAC"}

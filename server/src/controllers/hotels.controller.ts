@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Hotel from "../models/hotel.model";
 import { NotFoundError } from "../errors";
-import { SearchResponse } from "../shared/types";
+import { SearchResponse } from "../types/types";
 import {
   constructObjectQueries,
   constructSorting,

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { BookingDocument } from "../shared/types";
+import { BookingDocument } from "../types/types";
 
 const bookingSchema = new mongoose.Schema<BookingDocument>(
   {

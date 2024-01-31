@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { HotelDocument } from "../shared/types";
+import { HotelDocument } from "../types/types";
 
 const hotelSchema = new mongoose.Schema<HotelDocument>(
   {
